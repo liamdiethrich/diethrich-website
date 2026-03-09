@@ -17,8 +17,19 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
-  title: "Composer Portfolio Placeholder",
-  description: "Original placeholder portfolio built with Next.js"
+  metadataBase: new URL("https://liamdiethrich.com"),
+  title: "Liam Diethrich",
+  description: "Media and Concert Composer",
+  alternates: {
+    canonical: "/"
+  },
+  openGraph: {
+    title: "Liam Diethrich",
+    description: "Media and Concert Composer",
+    url: "https://liamdiethrich.com",
+    siteName: "Liam Diethrich",
+    type: "website"
+  }
 };
 
 export default function RootLayout({
