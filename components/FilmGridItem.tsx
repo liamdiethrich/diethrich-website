@@ -24,7 +24,15 @@ function getLocalVideo(item: FilmMusicItem) {
     return null;
   }
 
-  return <PosterVideoCard src={item.videoUrl} poster={item.posterImage} title={item.title} objectFitClassName="object-contain" />;
+  return (
+    <PosterVideoCard
+      src={item.videoUrl}
+      poster={item.posterImage}
+      title={item.title}
+      objectFitClassName="object-contain"
+      posterFitClassName="object-cover"
+    />
+  );
 }
 
 export function FilmGridItem({ item }: FilmGridItemProps) {

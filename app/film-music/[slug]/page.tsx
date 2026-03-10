@@ -33,7 +33,13 @@ export default async function FilmDetailPage({ params }: FilmDetailPageProps) {
           </h1>
         </div>
         {item.videoUrl ? (
-          <PosterVideoCard src={item.videoUrl} poster={item.posterImage} title={item.title} objectFitClassName="object-contain" />
+          <PosterVideoCard
+            src={item.videoUrl}
+            poster={item.posterImage}
+            title={item.title}
+            objectFitClassName="object-contain"
+            posterFitClassName="object-cover"
+          />
         ) : item.embedUrl ? (
           <div className="aspect-video overflow-hidden rounded-[2px] border border-neutral-300 bg-black shadow-[0_8px_22px_rgba(0,0,0,0.12)]">
             <iframe

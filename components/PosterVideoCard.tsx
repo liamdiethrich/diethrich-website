@@ -9,6 +9,7 @@ type PosterVideoCardProps = {
   poster?: string;
   className?: string;
   objectFitClassName?: string;
+  posterFitClassName?: string;
   sizes?: string;
 };
 
@@ -18,6 +19,7 @@ export function PosterVideoCard({
   poster,
   className = "",
   objectFitClassName = "object-cover",
+  posterFitClassName = "object-cover",
   sizes = "(max-width: 768px) 100vw, 50vw"
 }: PosterVideoCardProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -52,7 +54,7 @@ export function PosterVideoCard({
           aria-label={`Play ${title}`}
           className="absolute inset-0 block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          <Image src={poster} alt="" fill sizes={sizes} className={objectFitClassName} />
+          <Image src={poster} alt="" fill sizes={sizes} className={posterFitClassName} />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.12)_0%,rgba(10,10,12,0.32)_100%)]" />
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-black/58 md:h-20 md:w-20">

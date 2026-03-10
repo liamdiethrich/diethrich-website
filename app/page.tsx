@@ -8,13 +8,13 @@ const featuredMedia = [
   {
     title: "In Another Life",
     src: "/video/featured/in-another-life-rescore.mov",
-    poster: "/images/featured/in-another-life-poster.png",
+    poster: "/images/featured/in-another-life-poster-widescreen.jpg",
     caption: "Recorded with the RTVE Symphony Orchestra at Teatro Verdi"
   },
   {
     title: "Life Is Beautiful",
     src: "/video/featured/life-is-beautiful-scene-final.mov",
-    poster: "/images/featured/life-is-beautiful-poster.png",
+    poster: "/images/featured/life-is-beautiful-poster-widescreen.jpg",
     caption: "Recorded with a 52-piece orchestra at the Eastwood Scoring Stage (Warner Brothers Studios)"
   }
 ] as const;

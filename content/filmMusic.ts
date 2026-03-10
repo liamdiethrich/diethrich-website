@@ -13,25 +13,25 @@ export const filmMusicItems: FilmMusicItem[] = [
     sourceTitle: "Everything Everywhere All at Once",
     title: "In Another Life (Rescore)",
     videoUrl: "/video/featured/in-another-life-rescore.mov",
-    posterImage: "/images/featured/in-another-life-poster.png"
+    posterImage: "/images/featured/in-another-life-poster-widescreen.jpg"
   },
   {
     slug: "the-sunken-place-rescore",
     sourceTitle: "Get Out",
     title: "The Sunken Place (Rescore)",
     videoUrl: "/video/film-music/the-sunken-place-rescore.mov",
-    posterImage: "/images/film-music/the-sunken-place-poster.png"
+    posterImage: "/images/film-music/the-sunken-place-poster-widescreen.jpg"
   },
   {
     slug: "datamosh",
     title: "DataMosh",
     videoUrl: "/video/film-music/datamosh.mov",
-    posterImage: "/images/film-music/datamosh-poster.png"
+    posterImage: "/images/film-music/datamosh-poster-widescreen.jpg"
   },
   {
     slug: "life-is-beautiful",
     title: "Life Is Beautiful (Rescore)",
     videoUrl: "/video/featured/life-is-beautiful-scene-final.mov",
-    posterImage: "/images/featured/life-is-beautiful-poster.png"
+    posterImage: "/images/featured/life-is-beautiful-poster-widescreen.jpg"
   }
 ];
