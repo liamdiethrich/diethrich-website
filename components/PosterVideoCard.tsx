@@ -25,14 +25,20 @@ export function PosterVideoCard({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isActivated, setIsActivated] = useState(false);
 
-  const activateVideo = () => {
+  const activateVideo = async () => {
+    const video = videoRef.current;
+
     setIsActivated(true);
 
-    window.requestAnimationFrame(() => {
-      void videoRef.current?.play().catch(() => {
-        // Keep controls visible even if autoplay after click is blocked.
-      });
-    });
+    if (!video) {
+      return;
+    }
+
+    try {
+      await video.play();
+    } catch {
+      // Preserve native controls if playback is blocked for any reason.
+    }
   };
 
   return (
@@ -51,14 +57,17 @@ export function PosterVideoCard({
         <button
           type="button"
           onClick={activateVideo}
-          aria-label={`Play ${title}`}
+          aria-label={`Play video: ${title}`}
           className="absolute inset-0 block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           <Image src={poster} alt="" fill sizes={sizes} className={posterFitClassName} />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.12)_0%,rgba(10,10,12,0.32)_100%)]" />
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
             <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-black/58 md:h-20 md:w-20">
               <span className="ml-1 inline-block h-0 w-0 border-y-[11px] border-y-transparent border-l-[17px] border-l-white md:border-y-[13px] md:border-l-[20px]" />
+            </span>
+            <span className="rounded-full border border-white/30 bg-black/45 px-4 py-2 font-heading text-[0.72rem] uppercase tracking-[0.22em] text-white shadow-[0_12px_24px_rgba(0,0,0,0.24)] backdrop-blur-sm md:px-5 md:py-2.5 md:text-[0.82rem]">
+              Play Video
             </span>
           </div>
         </button>
