@@ -43,7 +43,7 @@ export default function AboutPage() {
           <div className="order-1 lg:order-2">
             <div className="overflow-hidden rounded-sm border border-neutral-300 bg-neutral-100">
               <Image
-                src="/images/about/liam-conducting-portrait.jpg"
+                src="/images/about/liam-conducting-portrait-enhanced.jpg"
                 alt="Liam Diethrich conducting"
                 width={900}
                 height={1200}
