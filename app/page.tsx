@@ -29,7 +29,7 @@ export default function HomePage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[38%_24%] md:object-[center_28%]"
+          className="object-cover object-[31%_24%] md:object-[center_28%]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,9,12,0.12)_0%,rgba(7,9,12,0.26)_34%,rgba(5,7,10,0.9)_100%)] md:bg-[linear-gradient(90deg,rgba(10,12,16,0.06)_0%,rgba(10,12,16,0.12)_24%,rgba(8,10,13,0.2)_48%,rgba(7,9,12,0.66)_70%,rgba(6,7,9,0.95)_100%)]" />
         <div className="hidden md:absolute md:inset-y-0 md:right-0 md:block md:w-[39%] md:bg-[linear-gradient(90deg,rgba(7,9,12,0)_0%,rgba(7,9,12,0.2)_12%,rgba(6,7,9,0.96)_100%)]" />
