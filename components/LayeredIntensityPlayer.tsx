@@ -113,6 +113,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
   const sliderId = `intensity-${track.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
   const layerStartOffsets = track.layerStartOffsets ?? DEFAULT_LAYER_TIMING;
   const layerLeadInSilence = track.layerLeadInSilence ?? DEFAULT_LAYER_TIMING;
+  const loopDuration = track.loopDuration;
   const blendWeights = getBlendWeights(sliderValue);
   const allVideosReady = INTENSITY_LAYER_KEYS.every((key) => videoStatus[key] === "ready");
   const hasVideoError = INTENSITY_LAYER_KEYS.some((key) => videoStatus[key] === "error");
@@ -379,7 +380,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
       };
 
       buffersRef.current = loaded;
-      durationRef.current = Math.max(
+      const inferredDuration = Math.max(
         0,
         Math.min(
           ambient.duration - layerStartOffsets.ambient,
@@ -387,6 +388,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
           veryIntense.duration - layerStartOffsets.veryIntense
         )
       );
+      durationRef.current = Math.max(0, Math.min(loopDuration ?? inferredDuration, inferredDuration));
       setIsReady(true);
       return loaded;
     } catch (loadError) {
@@ -400,6 +402,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
     layerLeadInSilence.ambient,
     layerLeadInSilence.intense,
     layerLeadInSilence.veryIntense,
+    loopDuration,
     layerStartOffsets.ambient,
     layerStartOffsets.intense,
     layerStartOffsets.veryIntense,
@@ -662,10 +665,10 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
         <button
           type="button"
           onClick={stop}
-          aria-label="Stop layered intensity demo"
+          aria-label="Restart layered intensity demo"
           className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-3 py-1 text-xs uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          Stop
+          Restart
         </button>
         <p className="self-center text-[11px] uppercase tracking-[0.12em] text-neutral-300">
           {isLoading ? "Loading layers..." : isPlaying ? "Playing" : isReady ? "Ready" : "Idle"}

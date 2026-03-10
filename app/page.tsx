@@ -19,6 +19,12 @@ const featuredMedia = [
   }
 ] as const;
 
+const awardBadge = {
+  emblemSrc: "/images/awards/the-american-prize-emblem.png",
+  primaryLine: "Winner of The American Prize",
+  secondaryLine: "Recognized for excellence in composition"
+} as const;
+
 export default function HomePage() {
   return (
     <div className="bg-canvas">
@@ -39,9 +45,32 @@ export default function HomePage() {
             <h1 className="font-heading text-[clamp(2.45rem,13vw,4.05rem)] uppercase leading-[0.92] tracking-[0.13em] md:text-[clamp(4.05rem,5.6vw,5.5rem)] md:tracking-[0.15em]">
               Liam Diethrich
             </h1>
-            <p className="max-w-[18rem] text-[0.9rem] leading-relaxed tracking-[0.11em] text-neutral-200 sm:text-[0.98rem] md:max-w-[24rem] md:text-[1.14rem] md:tracking-[0.12em]">
-              Media and Concert Composer
-            </p>
+            <div className="flex w-full flex-col items-center space-y-5 md:items-end md:space-y-6">
+              <p className="max-w-[18rem] text-[0.9rem] leading-relaxed tracking-[0.11em] text-neutral-200 sm:text-[0.98rem] md:max-w-[24rem] md:text-[1.14rem] md:tracking-[0.12em]">
+                Media and Concert Composer
+              </p>
+
+              <div className="w-full max-w-[18rem] sm:max-w-[19.25rem] md:max-w-[22.75rem]">
+                <div className="mx-auto flex flex-col items-center gap-3 rounded-[20px] border border-white/10 bg-[rgba(10,12,16,0.5)] px-4 py-3.5 text-center shadow-[0_18px_36px_rgba(0,0,0,0.24)] backdrop-blur-[14px] md:mx-0 md:flex-row md:items-center md:gap-4 md:px-4.5 md:py-4 md:text-left">
+                  <Image
+                    src={awardBadge.emblemSrc}
+                    alt="The American Prize emblem"
+                    width={96}
+                    height={93}
+                    sizes="(max-width: 768px) 64px, 96px"
+                    className="h-auto w-14 shrink-0 object-contain sm:w-16 md:w-24"
+                  />
+                  <div className="space-y-1.5">
+                    <p className="font-heading text-[0.72rem] uppercase leading-tight tracking-[0.14em] text-neutral-50 sm:text-[0.76rem] md:text-[0.83rem]">
+                      {awardBadge.primaryLine}
+                    </p>
+                    <p className="text-[0.72rem] leading-relaxed tracking-[0.02em] text-neutral-300 md:text-[0.79rem]">
+                      {awardBadge.secondaryLine}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </Container>
       </section>

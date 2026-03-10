@@ -18,6 +18,7 @@ export type LayeredTrack = {
   videoLayers: IntensityLayerMap<string>;
   layerStartOffsets?: IntensityLayerMap<number>;
   layerLeadInSilence?: IntensityLayerMap<number>;
+  loopDuration?: number;
 };
 
 export type GameTrack = NormalTrack | LayeredTrack;
@@ -57,11 +58,13 @@ export const layeredIntensityDemoTrack: LayeredTrack = {
     veryIntense: 0.21
   },
   layerLeadInSilence: {
-    // Ambient enters at the shared downbeat after the intro section.
-    ambient: 5.73,
+    // Ambient's first bass F lands on the final intro hit shared by the other two layers.
+    ambient: 5.17,
     intense: 0,
     veryIntense: 0
-  }
+  },
+  // Loop on the last common beat and exclude the ambient tail / intense outros.
+  loopDuration: 149.5
 };
 
 export const smokeBreakMenuTrack: NormalTrack = {
