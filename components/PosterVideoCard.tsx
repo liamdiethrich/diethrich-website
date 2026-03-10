@@ -62,12 +62,9 @@ export function PosterVideoCard({
         >
           <Image src={poster} alt="" fill sizes={sizes} className={posterFitClassName} />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.12)_0%,rgba(10,10,12,0.32)_100%)]" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+          <div className="absolute inset-0 flex items-center justify-center">
             <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-black/58 md:h-20 md:w-20">
               <span className="ml-1 inline-block h-0 w-0 border-y-[11px] border-y-transparent border-l-[17px] border-l-white md:border-y-[13px] md:border-l-[20px]" />
-            </span>
-            <span className="rounded-full border border-white/30 bg-black/45 px-4 py-2 font-heading text-[0.72rem] uppercase tracking-[0.22em] text-white shadow-[0_12px_24px_rgba(0,0,0,0.24)] backdrop-blur-sm md:px-5 md:py-2.5 md:text-[0.82rem]">
-              Play Video
             </span>
           </div>
         </button>
