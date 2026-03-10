@@ -41,7 +41,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${barlowCondensed.variable} ${sourceSans.variable} bg-canvas font-body text-neutral-900 antialiased`}>
         <Header />
-        <main className="min-h-screen pt-[92px]">{children}</main>
+        <main className="min-h-screen pt-[76px] md:pt-[92px]">{children}</main>
         <Footer />
       </body>
     </html>

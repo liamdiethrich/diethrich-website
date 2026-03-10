@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
+import { PosterVideoCard } from "@/components/PosterVideoCard";
 import { siteConfig } from "@/content/site";
 
 const featuredMedia = [
@@ -21,47 +22,39 @@ const featuredMedia = [
 export default function HomePage() {
   return (
     <div className="bg-canvas">
-      <section className="relative -mt-[92px] min-h-screen w-full overflow-hidden bg-[#100f12]">
+      <section className="relative -mt-[76px] min-h-[92svh] w-full overflow-hidden bg-[#100f12] md:-mt-[92px] md:min-h-screen">
         <Image
           src="/images/home/liam-conducting.jpg"
           alt=""
           fill
           priority
-          className="object-cover object-[center_28%]"
+          sizes="100vw"
+          className="object-cover object-[38%_24%] md:object-[center_28%]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(28,15,10,0.14)_0%,rgba(22,14,11,0.16)_22%,rgba(13,11,12,0.28)_48%,rgba(8,8,10,0.72)_70%,rgba(6,7,9,0.97)_100%)]" />
-        <div className="absolute inset-y-0 right-0 w-[39%] bg-[linear-gradient(90deg,rgba(9,10,12,0)_0%,rgba(8,8,10,0.28)_12%,rgba(6,7,9,0.98)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(243,100,36,0.22)_0%,rgba(243,100,36,0.05)_18%,rgba(243,100,36,0)_40%)]" />
-        <Container className="relative z-10 flex min-h-screen max-w-none items-center justify-end pb-20 pt-28 md:px-[44px] xl:px-[60px]">
-          <div className="ml-auto flex w-full max-w-[29rem] flex-col items-end space-y-7 text-right text-neutral-100">
-            <h1 className="font-heading text-[clamp(4.05rem,5.6vw,5.5rem)] uppercase leading-[0.92] tracking-[0.15em]">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,12,11,0.18)_0%,rgba(12,10,11,0.4)_38%,rgba(7,7,10,0.94)_100%)] md:bg-[linear-gradient(90deg,rgba(28,15,10,0.14)_0%,rgba(22,14,11,0.16)_22%,rgba(13,11,12,0.28)_48%,rgba(8,8,10,0.72)_70%,rgba(6,7,9,0.97)_100%)]" />
+        <div className="hidden md:absolute md:inset-y-0 md:right-0 md:block md:w-[39%] md:bg-[linear-gradient(90deg,rgba(9,10,12,0)_0%,rgba(8,8,10,0.28)_12%,rgba(6,7,9,0.98)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(243,100,36,0.18)_0%,rgba(243,100,36,0.04)_20%,rgba(243,100,36,0)_42%)] md:bg-[radial-gradient(circle_at_18%_14%,rgba(243,100,36,0.22)_0%,rgba(243,100,36,0.05)_18%,rgba(243,100,36,0)_40%)]" />
+        <Container className="relative z-10 flex min-h-[92svh] max-w-none items-end justify-center px-4 pb-14 pt-28 sm:px-5 md:min-h-screen md:justify-end md:pb-20 md:px-[44px] xl:px-[60px]">
+          <div className="flex w-full max-w-[19rem] flex-col items-center space-y-4 text-center text-neutral-100 sm:max-w-[21rem] md:ml-auto md:max-w-[29rem] md:items-end md:space-y-7 md:text-right">
+            <h1 className="font-heading text-[clamp(2.45rem,13vw,4.05rem)] uppercase leading-[0.92] tracking-[0.13em] md:text-[clamp(4.05rem,5.6vw,5.5rem)] md:tracking-[0.15em]">
               Liam Diethrich
             </h1>
-            <p className="max-w-[24rem] text-[1.04rem] leading-relaxed tracking-[0.12em] text-neutral-200 md:text-[1.14rem]">
+            <p className="max-w-[18rem] text-[0.9rem] leading-relaxed tracking-[0.11em] text-neutral-200 sm:text-[0.98rem] md:max-w-[24rem] md:text-[1.14rem] md:tracking-[0.12em]">
               Media and Concert Composer
             </p>
           </div>
         </Container>
       </section>
 
-      <section className="bg-canvas pb-28 pt-8 md:pb-32 md:pt-10">
-        <Container className="max-w-none md:px-[44px] xl:px-[60px]">
+      <section className="bg-canvas pb-20 pt-6 md:pb-32 md:pt-10">
+        <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
           <div className="grid gap-x-3 gap-y-10 md:grid-cols-2 xl:gap-x-4">
             {featuredMedia.map((item) => (
-              <article key={item.title} className="space-y-6">
-                <div className="overflow-hidden rounded-[2px] border border-neutral-300 bg-black shadow-[0_8px_22px_rgba(0,0,0,0.14)]">
-                  <video
-                    src={item.src}
-                    poster={item.poster}
-                    controls
-                    playsInline
-                    preload="metadata"
-                    className="aspect-video w-full cursor-pointer bg-black object-cover"
-                  />
-                </div>
-                <div className="space-y-4 text-neutral-800">
-                  <h2 className="text-[1.05rem] font-semibold leading-none md:text-[1.1rem]">{item.title}</h2>
-                  <p className="max-w-[42rem] text-[0.98rem] leading-[1.7] text-neutral-700 md:text-[1rem]">
+              <article key={item.title} className="space-y-4 md:space-y-6">
+                <PosterVideoCard src={item.src} poster={item.poster} title={item.title} className="shadow-[0_8px_22px_rgba(0,0,0,0.14)]" />
+                <div className="space-y-3 text-neutral-800 md:space-y-4">
+                  <h2 className="text-[1rem] font-semibold leading-none md:text-[1.1rem]">{item.title}</h2>
+                  <p className="max-w-[42rem] text-[0.93rem] leading-[1.65] text-neutral-700 md:text-[1rem]">
                     {item.caption}
                   </p>
                 </div>
@@ -69,10 +62,10 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-14 flex justify-center md:mt-16">
+          <div className="mt-12 flex justify-center md:mt-16">
             <Link
               href={siteConfig.ctaUrl}
-              className="rounded-full bg-accent px-9 py-4 text-[1.05rem] font-semibold text-white transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-10"
+              className="rounded-full bg-accent px-8 py-3.5 text-[1rem] font-semibold text-white transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-10 md:py-4 md:text-[1.05rem]"
             >
               View Portfolio
             </Link>

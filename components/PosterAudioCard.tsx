@@ -62,29 +62,31 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
           />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.08)_0%,rgba(12,12,14,0.42)_100%)]" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="flex h-20 w-20 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition group-hover:bg-black/58">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition group-hover:bg-black/58 md:h-20 md:w-20">
               {isPlaying ? (
-                <span className="text-lg font-semibold tracking-[0.08em]">II</span>
+                <span className="text-base font-semibold tracking-[0.08em] md:text-lg">II</span>
               ) : (
-                <span className="ml-1 inline-block h-0 w-0 border-y-[13px] border-y-transparent border-l-[20px] border-l-white" />
+                <span className="ml-1 inline-block h-0 w-0 border-y-[11px] border-y-transparent border-l-[17px] border-l-white md:border-y-[13px] md:border-l-[20px]" />
               )}
             </span>
           </div>
-          <span className="absolute bottom-4 right-4 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs uppercase tracking-[0.12em] text-white">
+          <span className="absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-[0.12em] text-white md:bottom-4 md:right-4 md:text-xs">
             {durationLabel}
           </span>
         </div>
       </button>
 
-      <div className="flex items-center justify-between gap-4 p-4">
+      <div className="flex items-center justify-between gap-4 p-3.5 md:p-4">
         <div className="min-w-0">
-          <p className="font-heading text-[1rem] uppercase tracking-[0.14em] text-neutral-100">{track.title}</p>
+          <p className="font-heading text-[0.9rem] uppercase tracking-[0.12em] text-neutral-100 md:text-[1rem] md:tracking-[0.14em]">
+            {track.title}
+          </p>
           <p className="text-xs uppercase tracking-[0.12em] text-neutral-300">{track.mood}</p>
         </div>
         <button
           type="button"
           onClick={togglePlay}
-          className="shrink-0 rounded-sm border border-accent/80 bg-[#1B1B1D] px-3 py-1 text-xs uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="shrink-0 rounded-sm border border-accent/80 bg-[#1B1B1D] px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:text-xs"
         >
           {isPlaying ? "Pause" : "Play"}
         </button>
