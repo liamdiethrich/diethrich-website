@@ -5,6 +5,7 @@ export type FilmMusicItem = {
   videoUrl?: string;
   embedUrl?: string;
   posterImage?: string;
+  homeCaption?: string;
 };
 
 export const filmMusicItems: FilmMusicItem[] = [
@@ -13,7 +14,8 @@ export const filmMusicItems: FilmMusicItem[] = [
     sourceTitle: "Everything Everywhere All at Once",
     title: "In Another Life (Rescore)",
     videoUrl: "/video/featured/in-another-life-rescore.mp4",
-    posterImage: "/images/featured/in-another-life-poster-widescreen.jpg"
+    posterImage: "/images/featured/in-another-life-poster-widescreen.jpg",
+    homeCaption: "Recorded with the RTVE Symphony Orchestra at Teatro Verdi"
   },
   {
     slug: "the-sunken-place-rescore",
@@ -30,8 +32,10 @@ export const filmMusicItems: FilmMusicItem[] = [
   },
   {
     slug: "life-is-beautiful",
-    title: "Life Is Beautiful (Rescore)",
+    sourceTitle: "Life Is Beautiful",
+    title: "Goodbye My Son (Rescore)",
     videoUrl: "/video/featured/life-is-beautiful-scene-final.mp4",
-    posterImage: "/images/featured/life-is-beautiful-poster-widescreen.jpg"
+    posterImage: "/images/featured/life-is-beautiful-poster-widescreen.jpg",
+    homeCaption: "Recorded with a 52-piece orchestra at the Eastwood Scoring Stage (Warner Brothers Studios)"
   }
 ];

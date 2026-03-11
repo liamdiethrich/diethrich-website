@@ -13,12 +13,11 @@ export const siteConfig = {
   logoText: "LIAM DIETHRICH",
   navLinks: [
     { label: "Home", href: "/" },
-    { label: "Film Music", href: "/film-music" },
-    { label: "Game Music", href: "/game-music" },
+    { label: "Music", href: "/film-music" },
     { label: "About", href: "/about" }
   ] satisfies NavItem[],
   socialLinks: [] as SocialItem[],
   contactUrl: "#",
   resumeUrl: "#",
-  ctaUrl: "#"
+  ctaUrl: "/film-music"
 };

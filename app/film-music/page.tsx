@@ -1,6 +1,9 @@
 import { Container } from "@/components/Container";
 import { FilmGridItem } from "@/components/FilmGridItem";
 import { filmMusicItems } from "@/content/filmMusic";
+import { LayeredIntensityPlayer } from "@/components/LayeredIntensityPlayer";
+import { PosterAudioCard } from "@/components/PosterAudioCard";
+import { layeredIntensityDemoTrack, smokeBreakMenuTrack } from "@/content/gameMusic";
 
 export default function FilmMusicPage() {
   return (
@@ -14,6 +17,20 @@ export default function FilmMusicPage() {
             <FilmGridItem key={item.slug} item={item} />
           ))}
         </div>
+
+        <section id="game-music" className="mt-16 md:mt-24">
+          <h2 className="mb-8 text-center font-heading text-[2rem] uppercase tracking-[0.2em] text-neutral-900 md:mb-12 md:text-left md:text-3xl md:tracking-[0.24em]">
+            Game Music
+          </h2>
+          <div className="mx-auto flex max-w-[980px] flex-col items-center gap-10 md:gap-12 lg:gap-14">
+            <div className="w-full">
+              <LayeredIntensityPlayer track={layeredIntensityDemoTrack} />
+            </div>
+            <div className="w-full max-w-[460px]">
+              <PosterAudioCard track={smokeBreakMenuTrack} />
+            </div>
+          </div>
+        </section>
       </Container>
     </div>
   );

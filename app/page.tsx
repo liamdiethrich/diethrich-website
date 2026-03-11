@@ -2,22 +2,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { PosterVideoCard } from "@/components/PosterVideoCard";
+import { filmMusicItems } from "@/content/filmMusic";
 import { siteConfig } from "@/content/site";
 
-const featuredMedia = [
-  {
-    title: "In Another Life",
-    src: "/video/featured/in-another-life-rescore.mp4",
-    poster: "/images/featured/in-another-life-poster-widescreen.jpg",
-    caption: "Recorded with the RTVE Symphony Orchestra at Teatro Verdi"
-  },
-  {
-    title: "Life Is Beautiful",
-    src: "/video/featured/life-is-beautiful-scene-final.mp4",
-    poster: "/images/featured/life-is-beautiful-poster-widescreen.jpg",
-    caption: "Recorded with a 52-piece orchestra at the Eastwood Scoring Stage (Warner Brothers Studios)"
-  }
-] as const;
+const featuredMedia = filmMusicItems
+  .filter((item) => item.videoUrl)
+  .map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    src: item.videoUrl!,
+    poster: item.posterImage,
+    caption: item.homeCaption ?? item.sourceTitle ?? null
+  }));
 
 const awardBadge = {
   emblemSrc: "/images/awards/the-american-prize-emblem.png",
@@ -79,13 +75,15 @@ export default function HomePage() {
         <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
           <div className="grid gap-x-3 gap-y-10 md:grid-cols-2 xl:gap-x-4">
             {featuredMedia.map((item) => (
-              <article key={item.title} className="space-y-4 md:space-y-6">
+              <article key={item.slug} className="space-y-4 md:space-y-6">
                 <PosterVideoCard src={item.src} poster={item.poster} title={item.title} className="shadow-[0_8px_22px_rgba(0,0,0,0.14)]" />
-                <div className="space-y-3 text-neutral-800 md:space-y-4">
+                <div className="space-y-2 text-neutral-800 md:space-y-3">
                   <h2 className="text-[1rem] font-semibold leading-none md:text-[1.1rem]">{item.title}</h2>
-                  <p className="max-w-[42rem] text-[0.93rem] leading-[1.65] text-neutral-700 md:text-[1rem]">
-                    {item.caption}
-                  </p>
+                  {item.caption ? (
+                    <p className="max-w-[42rem] text-[0.93rem] leading-[1.65] text-neutral-700 md:text-[1rem]">
+                      {item.caption}
+                    </p>
+                  ) : null}
                 </div>
               </article>
             ))}
