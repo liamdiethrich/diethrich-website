@@ -58,8 +58,8 @@ export const layeredIntensityDemoTrack: LayeredTrack = {
     veryIntense: 0.21
   },
   layerLeadInSilence: {
-    // Ambient's first bass F lands on the final intro hit shared by the other two layers.
-    ambient: 5.17,
+    // 29s–53s bass activity aligns best when the ambient layer enters 5.52s after transport start.
+    ambient: 5.52,
     intense: 0,
     veryIntense: 0
   },
