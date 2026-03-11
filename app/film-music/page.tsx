@@ -26,7 +26,7 @@ export default function FilmMusicPage() {
             <div className="w-full">
               <LayeredIntensityPlayer track={layeredIntensityDemoTrack} />
             </div>
-            <div className="w-full max-w-[460px]">
+            <div className="w-full">
               <PosterAudioCard track={smokeBreakMenuTrack} />
             </div>
           </div>

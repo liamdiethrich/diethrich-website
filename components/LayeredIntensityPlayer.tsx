@@ -596,18 +596,18 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
   }, [pauseVideos, stopSources]);
 
   return (
-    <div className="rounded-sm border border-[#3A3A3E] bg-[#232326] p-4 text-neutral-100 shadow-[0_10px_22px_rgba(0,0,0,0.24)]">
-      <div className="mb-4 flex items-center gap-4">
-        <span className="flex h-8 w-8 items-center justify-center rounded-sm border border-accent/70 bg-[#1B1B1D]">
-          <span className="ml-[2px] inline-block h-0 w-0 border-y-[5px] border-y-transparent border-l-[8px] border-l-accent" />
+    <div className="rounded-sm border border-[#3A3A3E] bg-[#232326] p-5 text-neutral-100 shadow-[0_10px_22px_rgba(0,0,0,0.24)] md:p-6">
+      <div className="mb-5 flex items-center gap-4 md:mb-6 md:gap-5">
+        <span className="flex h-14 w-14 items-center justify-center rounded-sm border border-accent/70 bg-[#1B1B1D] md:h-16 md:w-16">
+          <span className="ml-[3px] inline-block h-0 w-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-accent md:border-y-[12px] md:border-l-[18px]" />
         </span>
         <div className="min-w-0">
-          <p className="font-heading text-sm uppercase tracking-[0.14em]">{track.title}</p>
-          <p className="text-xs uppercase tracking-[0.12em] text-neutral-300">{track.mood}</p>
+          <p className="font-heading text-[1rem] uppercase tracking-[0.14em] md:text-[1.35rem]">{track.title}</p>
+          <p className="text-[11px] uppercase tracking-[0.12em] text-neutral-300 md:text-sm">{track.mood}</p>
         </div>
       </div>
 
-      <div className="mb-5">
+      <div className="mb-6">
         <div className="relative aspect-video overflow-hidden rounded-[18px] border border-[#3A3A3E] bg-[radial-gradient(circle_at_top,#3a3a40_0%,#1a1b1f_48%,#101114_100%)] shadow-[0_24px_48px_rgba(0,0,0,0.42)]">
           {INTENSITY_LAYER_KEYS.map((key) => (
             <video
@@ -633,9 +633,11 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
 
           {!showVideoVisualizer ? (
             <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(180deg,rgba(15,16,18,0.92)_0%,rgba(11,12,14,0.98)_100%)] px-6 text-center">
-              <div className="space-y-3">
-                <p className="font-heading text-sm uppercase tracking-[0.18em] text-neutral-100">Visual Intensity Layers</p>
-                <p className="text-sm leading-relaxed text-neutral-300">{videoPlaceholderLabel}</p>
+              <div className="space-y-3 md:space-y-4">
+                <p className="font-heading text-base uppercase tracking-[0.18em] text-neutral-100 md:text-[1.2rem]">
+                  Visual Intensity Layers
+                </p>
+                <p className="text-base leading-relaxed text-neutral-300 md:text-lg">{videoPlaceholderLabel}</p>
               </div>
             </div>
           ) : null}
@@ -645,12 +647,12 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2.5 md:gap-3">
         <button
           type="button"
           onClick={play}
           aria-label="Play layered intensity demo"
-          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-3 py-1 text-xs uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-4 py-2 text-[11px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-5 md:py-2.5 md:text-sm"
         >
           Play
         </button>
@@ -658,7 +660,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
           type="button"
           onClick={pause}
           aria-label="Pause layered intensity demo"
-          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-3 py-1 text-xs uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-4 py-2 text-[11px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-5 md:py-2.5 md:text-sm"
         >
           Pause
         </button>
@@ -666,17 +668,17 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
           type="button"
           onClick={stop}
           aria-label="Restart layered intensity demo"
-          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-3 py-1 text-xs uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-4 py-2 text-[11px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-5 md:py-2.5 md:text-sm"
         >
           Restart
         </button>
-        <p className="self-center text-[11px] uppercase tracking-[0.12em] text-neutral-300">
+        <p className="self-center text-[12px] uppercase tracking-[0.12em] text-neutral-300 md:text-sm">
           {isLoading ? "Loading layers..." : isPlaying ? "Playing" : isReady ? "Ready" : "Idle"}
         </p>
       </div>
 
-      <div className="mt-5 space-y-3 rounded-sm border border-[#3A3A3E] bg-[#1E1E20] p-3">
-        <label htmlFor={sliderId} className="font-heading text-xs uppercase tracking-[0.14em] text-neutral-300">
+      <div className="mt-6 space-y-3.5 rounded-sm border border-[#3A3A3E] bg-[#1E1E20] p-4 md:space-y-4 md:p-5">
+        <label htmlFor={sliderId} className="font-heading text-sm uppercase tracking-[0.14em] text-neutral-300 md:text-base">
           Intensity
         </label>
         <input
@@ -690,19 +692,19 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
           onChange={onSliderChange}
           className="w-full accent-accent"
         />
-        <div className="grid grid-cols-3 gap-2 text-[10px] uppercase tracking-[0.11em] text-neutral-300 md:text-xs">
+        <div className="grid grid-cols-3 gap-2 text-[11px] uppercase tracking-[0.11em] text-neutral-300 md:text-sm">
           <span>Very Intense</span>
           <span className="text-center">Intense</span>
           <span className="text-right">Ambient</span>
         </div>
       </div>
 
-      <p className="mt-4 text-sm leading-relaxed text-neutral-300">
+      <p className="mt-5 text-base leading-relaxed text-neutral-300 md:text-lg">
         Drag the slider to move through musical intensity layers.
       </p>
 
       {error ? (
-        <p className="mt-4 rounded-sm border border-red-500/60 bg-red-900/30 px-3 py-2 text-xs uppercase tracking-[0.12em] text-red-100">
+        <p className="mt-5 rounded-sm border border-red-500/60 bg-red-900/30 px-4 py-3 text-sm uppercase tracking-[0.12em] text-red-100">
           {error}
         </p>
       ) : null}
