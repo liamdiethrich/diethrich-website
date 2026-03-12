@@ -63,8 +63,9 @@ export const layeredIntensityDemoTrack: LayeredTrack = {
     intense: 0,
     veryIntense: 0
   },
-  // Loop on the last common beat and exclude the ambient tail / intense outros.
-  loopDuration: 149.5
+  // One full outro bar was still slipping through. End on the prior shared downbeat so the
+  // repeat returns on the same bass F instead of including the first outro bar.
+  loopDuration: 147.331
 };
 
 export const smokeBreakMenuTrack: NormalTrack = {

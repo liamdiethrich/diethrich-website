@@ -519,6 +519,15 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
     syncVideosToOffset(0);
   }, [pause, syncVideosToOffset]);
 
+  const togglePrimaryTransport = useCallback(() => {
+    if (isPlaying) {
+      pause();
+      return;
+    }
+
+    void play();
+  }, [isPlaying, pause, play]);
+
   const onSliderChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const value = Number(event.target.value);
@@ -598,9 +607,21 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
   return (
     <div className="rounded-sm border border-[#3A3A3E] bg-[#232326] p-5 text-neutral-100 shadow-[0_10px_22px_rgba(0,0,0,0.24)] md:p-6">
       <div className="mb-5 flex items-center gap-4 md:mb-6 md:gap-5">
-        <span className="flex h-14 w-14 items-center justify-center rounded-sm border border-accent/70 bg-[#1B1B1D] md:h-16 md:w-16">
-          <span className="ml-[3px] inline-block h-0 w-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-accent md:border-y-[12px] md:border-l-[18px]" />
-        </span>
+        <button
+          type="button"
+          onClick={togglePrimaryTransport}
+          aria-label={isPlaying ? "Pause layered intensity demo" : "Play layered intensity demo"}
+          className="flex h-14 w-14 items-center justify-center rounded-sm border border-accent/70 bg-[#1B1B1D] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:h-16 md:w-16"
+        >
+          {isPlaying ? (
+            <span className="flex items-center gap-[5px] md:gap-[6px]">
+              <span className="h-5 w-[5px] bg-current md:h-6 md:w-[6px]" />
+              <span className="h-5 w-[5px] bg-current md:h-6 md:w-[6px]" />
+            </span>
+          ) : (
+            <span className="ml-[3px] inline-block h-0 w-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-current md:border-y-[12px] md:border-l-[18px]" />
+          )}
+        </button>
         <div className="min-w-0">
           <p className="font-heading text-[1rem] uppercase tracking-[0.14em] md:text-[1.35rem]">{track.title}</p>
           <p className="text-[11px] uppercase tracking-[0.12em] text-neutral-300 md:text-sm">{track.mood}</p>

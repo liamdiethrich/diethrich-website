@@ -28,7 +28,8 @@ export const filmMusicItems: FilmMusicItem[] = [
     slug: "datamosh",
     title: "DataMosh",
     videoUrl: "/video/film-music/datamosh.mp4",
-    posterImage: "/images/film-music/datamosh-poster-widescreen.jpg"
+    posterImage: "/images/film-music/datamosh-poster-widescreen.jpg",
+    homeCaption: "Recorded by Ex Ibex"
   },
   {
     slug: "life-is-beautiful",

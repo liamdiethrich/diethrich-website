@@ -84,7 +84,9 @@ export default function HomePage() {
               <article key={item.slug} className="space-y-4 md:space-y-6">
                 <PosterVideoCard src={item.src} poster={item.poster} title={item.title} className="shadow-[0_8px_22px_rgba(0,0,0,0.14)]" />
                 <div className="space-y-2 text-neutral-800 md:space-y-3">
-                  <h2 className="text-[1rem] font-semibold leading-none md:text-[1.1rem]">{item.title}</h2>
+                  <h2 className="text-[1.14rem] font-semibold leading-none tracking-[0.01em] md:text-[1.42rem]">
+                    {item.title}
+                  </h2>
                   {item.caption ? (
                     <p className="max-w-[42rem] text-[0.93rem] leading-[1.65] text-neutral-700 md:text-[1rem]">
                       {item.caption}
