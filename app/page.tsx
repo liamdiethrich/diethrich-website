@@ -37,12 +37,18 @@ export default function HomePage() {
         <div className="hidden md:absolute md:inset-y-0 md:right-0 md:block md:w-[39%] md:bg-[linear-gradient(90deg,rgba(7,9,12,0)_0%,rgba(7,9,12,0.2)_12%,rgba(6,7,9,0.96)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.015)_18%,rgba(255,255,255,0)_40%)] md:bg-[radial-gradient(circle_at_18%_14%,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.02)_18%,rgba(255,255,255,0)_40%)]" />
         <Container className="relative z-10 flex min-h-[92svh] max-w-none items-end justify-center px-4 pb-14 pt-28 sm:px-5 md:min-h-screen md:justify-end md:pb-20 md:px-[44px] xl:px-[60px]">
-          <div className="flex w-full max-w-[19rem] flex-col items-center space-y-4 text-center text-neutral-100 sm:max-w-[21rem] md:ml-auto md:max-w-[29rem] md:items-end md:space-y-7 md:text-right">
+          <div className="flex w-full max-w-[19rem] flex-col items-center space-y-4 text-center text-neutral-100 sm:max-w-[21rem] md:ml-auto md:max-w-[31rem] md:items-end md:space-y-6 md:text-right">
             <h1 className="font-heading text-[clamp(2.45rem,13vw,4.05rem)] uppercase leading-[0.92] tracking-[0.13em] md:text-[clamp(4.05rem,5.6vw,5.5rem)] md:tracking-[0.15em]">
               Liam Diethrich
             </h1>
-            <div className="flex w-full flex-col items-center space-y-5 md:items-end md:space-y-6">
-              <p className="max-w-[18rem] text-[0.9rem] leading-relaxed tracking-[0.11em] text-neutral-200 sm:text-[0.98rem] md:max-w-[24rem] md:text-[1.14rem] md:tracking-[0.12em]">
+            <div className="flex w-full flex-col items-center space-y-4 md:items-end md:space-y-5">
+              <p className="max-w-[18.25rem] text-[0.9rem] leading-[1.72] text-neutral-200 sm:max-w-[20rem] sm:text-[0.98rem] md:max-w-[28rem] md:text-[1.06rem] md:leading-[1.78]">
+                Composer and violinist Liam Diethrich (Juilliard, USC Screen Scoring) writes award-winning music for
+                screen, games, and the concert stage. His work is recognized for its distinctive voice, innovative
+                musical language, and collaborations with Grammy-winning ensembles.
+              </p>
+
+              <p className="max-w-[18rem] text-[0.82rem] leading-relaxed tracking-[0.11em] text-neutral-200 sm:text-[0.92rem] md:max-w-[24rem] md:text-[1.02rem] md:tracking-[0.12em]">
                 Media and Concert Composer
               </p>
 
