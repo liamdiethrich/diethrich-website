@@ -14,13 +14,11 @@ export default function AboutPage() {
           <div className="order-2 lg:order-1">
             <div className="space-y-6 text-base leading-relaxed text-neutral-700 md:text-lg">
               <p>
-                Liam Diethrich is a composer and violinist trained at Juilliard and USC’s Screen Scoring
-                program. Writing for film, games, and the concert stage, his award-winning music is recognized for
-                its distinctive voice and innovative musical language, and has been performed in collaboration with
-                Grammy-winning ensembles. His work has also been referenced in academic settings as an example of
-                contemporary scoring craft. Known for his versatility and creative intensity, Liam approaches each
-                project with the goal of creating music that heightens emotion and elevates the artistic vision behind
-                it.
+                Liam Diethrich is a composer and violinist trained at Juilliard and USC who writes for screen,
+                games, and the concert stage. His award-winning music is recognized for its unique and innovative
+                voice and has been performed in collaboration with Grammy-winning ensembles. Known for his stylistic
+                versatility and creativity, Liam approaches each project with the goal of heightening the emotional
+                experience and artistic vision behind it.
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
