@@ -22,7 +22,8 @@ export const filmMusicItems: FilmMusicItem[] = [
     sourceTitle: "Get Out",
     title: "The Sunken Place (Rescore)",
     videoUrl: "/video/film-music/the-sunken-place-rescore.mp4",
-    posterImage: "/images/film-music/the-sunken-place-poster-widescreen.jpg"
+    posterImage: "/images/film-music/the-sunken-place-poster-widescreen.jpg",
+    homeCaption: ""
   },
   {
     slug: "datamosh",
@@ -34,9 +35,9 @@ export const filmMusicItems: FilmMusicItem[] = [
   {
     slug: "life-is-beautiful",
     sourceTitle: "Life Is Beautiful",
-    title: "Goodbye My Son (Rescore)",
+    title: "Goodbye, My Son (Rescore)",
     videoUrl: "/video/featured/life-is-beautiful-scene-final.mp4",
     posterImage: "/images/featured/life-is-beautiful-poster-widescreen.jpg",
-    homeCaption: "Recorded with a 52-piece orchestra at the Eastwood Scoring Stage (Warner Brothers Studios)"
+    homeCaption: "Recorded with a 52-piece orchestra at the Eastwood Scoring Stage at Warner Brothers Studios"
   }
 ];
