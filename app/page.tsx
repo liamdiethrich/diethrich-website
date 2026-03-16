@@ -72,6 +72,19 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
+
+              <div
+                id="contact"
+                className="w-full max-w-[18rem] scroll-mt-28 rounded-[20px] border border-white/10 bg-[rgba(10,12,16,0.44)] px-4 py-3.5 text-center shadow-[0_18px_36px_rgba(0,0,0,0.22)] backdrop-blur-[14px] sm:max-w-[19.25rem] md:max-w-[22.75rem] md:px-5 md:py-4 md:text-left"
+              >
+                <p className="font-heading text-[0.74rem] uppercase leading-tight tracking-[0.15em] text-neutral-50 md:text-[0.82rem]">
+                  Contact
+                </p>
+                <p className="mt-2 text-[0.75rem] leading-relaxed text-neutral-300 md:text-[0.84rem]">
+                  For film, game, concert, and collaboration inquiries, please get in touch to discuss the project,
+                  timeline, and scope.
+                </p>
+              </div>
             </div>
           </div>
         </Container>

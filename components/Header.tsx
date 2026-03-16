@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { MouseEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { siteConfig } from "@/content/site";
 import { Container } from "./Container";
@@ -55,6 +56,17 @@ export function Header() {
 
     return "bg-canvas/95 backdrop-blur-sm shadow-sm";
   }, [transparentHomeHeader]);
+
+  const handleMobileNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (pathname === href) {
+      event.preventDefault();
+      setMobileMenuOpen(false);
+      window.location.assign(href);
+      return;
+    }
+
+    setMobileMenuOpen(false);
+  };
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${headerClassName}`}>
@@ -144,7 +156,8 @@ export function Header() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`border-b border-neutral-200/80 py-4 font-heading text-[1.15rem] uppercase tracking-[0.14em] text-accent ${
+                      onClick={(event) => handleMobileNavClick(event, item.href)}
+                      className={`border-b border-neutral-200/80 py-4 font-heading text-[1.15rem] uppercase tracking-[0.14em] text-accent transition-opacity active:opacity-70 ${
                         active ? "opacity-100" : "opacity-80"
                       }`}
                     >

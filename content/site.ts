@@ -17,7 +17,7 @@ export const siteConfig = {
     { label: "About", href: "/about" }
   ] satisfies NavItem[],
   socialLinks: [] as SocialItem[],
-  contactUrl: "#",
+  contactUrl: "/#contact",
   resumeUrl: "#",
   ctaUrl: "/film-music"
 };
