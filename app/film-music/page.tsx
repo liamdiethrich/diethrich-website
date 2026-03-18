@@ -4,7 +4,7 @@ import { AudioTrackCard } from "@/components/AudioTrackCard";
 import { filmMusicAudioTracks, filmMusicItems } from "@/content/filmMusic";
 import { LayeredIntensityPlayer } from "@/components/LayeredIntensityPlayer";
 import { PosterAudioCard } from "@/components/PosterAudioCard";
-import { finallyFreeTrack, layeredIntensityDemoTrack } from "@/content/gameMusic";
+import { layeredIntensityDemoTrack, smokeBreakMenuTrack } from "@/content/gameMusic";
 
 export default function FilmMusicPage() {
   return (
@@ -28,7 +28,7 @@ export default function FilmMusicPage() {
               <LayeredIntensityPlayer track={layeredIntensityDemoTrack} />
             </div>
             <div className="w-full max-w-[320px] self-start">
-              <PosterAudioCard track={finallyFreeTrack} />
+              <PosterAudioCard track={smokeBreakMenuTrack} />
             </div>
           </div>
         </section>

@@ -93,9 +93,9 @@ export const filmMusicAudioTracks: FilmMusicAudioTrack[] = [
     imageUrl: "/images/film-music/audio-tracks/simple-joy.jpg"
   },
   {
-    slug: "smoke-break",
-    title: "Smoke Break!",
-    audioUrl: "/audio/film-music/smoke-break.wav",
-    imageUrl: "/images/film-music/audio-tracks/smoke-break.jpg"
+    slug: "finally-free",
+    title: "Finally Free",
+    audioUrl: "/audio/film-music/finally-free.wav",
+    imageUrl: "/images/film-music/audio-tracks/finally-free.png"
   }
 ];

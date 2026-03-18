@@ -70,12 +70,12 @@ export const layeredIntensityDemoTrack: LayeredTrack = {
   loopDuration: 147.331
 };
 
-export const finallyFreeTrack: NormalTrack = {
+export const smokeBreakMenuTrack: NormalTrack = {
   type: "normal",
-  title: "Finally Free",
-  mood: "Standalone Cue",
-  audioUrl: "/audio/game-music/finally-free.wav",
-  image: "/images/game-music/finally-free.png"
+  title: "Smoke Break Menu Music",
+  mood: "Menu Music",
+  audioUrl: "/audio/game-music/smoke-break-menu-music.m4a",
+  image: "/images/game-music/smoke-break-menu-music.jpg"
 };
 
 export const gameProjects: GameProject[] = [
@@ -83,7 +83,7 @@ export const gameProjects: GameProject[] = [
     slug: "featured-game-music",
     title: "FEATURED GAME MUSIC",
     description: "Layered adaptive combat scoring paired with a standalone menu cue.",
-    image: "/images/game-music/finally-free.png",
-    tracks: [layeredIntensityDemoTrack, finallyFreeTrack]
+    image: "/images/game-music/smoke-break-menu-music.jpg",
+    tracks: [layeredIntensityDemoTrack, smokeBreakMenuTrack]
   }
 ];

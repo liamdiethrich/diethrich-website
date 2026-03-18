@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://liamdiethrich.com"),
   title: "Liam Diethrich",
   description: "Media and Concert Composer",
+  icons: {
+    icon: "/icon.png"
+  },
   alternates: {
     canonical: "/"
   },
