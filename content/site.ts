@@ -8,6 +8,12 @@ export type SocialItem = {
   href: string;
 };
 
+export type ContactMethod = {
+  label: string;
+  value: string;
+  href: string;
+};
+
 export const siteConfig = {
   siteName: "LIAM DIETHRICH",
   logoText: "LIAM DIETHRICH",
@@ -18,6 +24,18 @@ export const siteConfig = {
   ] satisfies NavItem[],
   socialLinks: [] as SocialItem[],
   contactUrl: "/contact",
+  contact: {
+    email: {
+      label: "Email",
+      value: "liamdiethrich@gmail.com",
+      href: "mailto:liamdiethrich@gmail.com"
+    },
+    instagram: {
+      label: "Instagram",
+      value: "@liamdiethrich",
+      href: "https://www.instagram.com/liamdiethrich/"
+    }
+  } satisfies Record<"email" | "instagram", ContactMethod>,
   resumeUrl: "#",
   ctaUrl: "/film-music"
 };

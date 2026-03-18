@@ -75,14 +75,9 @@ export default function HomePage() {
 
               <Link
                 href={siteConfig.contactUrl}
-                className="w-full max-w-[18rem] rounded-[20px] border border-white/10 bg-[rgba(10,12,16,0.44)] px-4 py-3.5 text-center shadow-[0_18px_36px_rgba(0,0,0,0.22)] backdrop-blur-[14px] transition hover:bg-[rgba(14,16,20,0.58)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:max-w-[19.25rem] md:max-w-[22.75rem] md:px-5 md:py-4 md:text-left"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-8 py-3 text-center font-heading text-sm uppercase tracking-[0.16em] text-black shadow-[0_18px_36px_rgba(0,0,0,0.22)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:min-h-[52px] md:px-10 md:py-3.5 md:text-[0.95rem]"
               >
-                <p className="font-heading text-[0.74rem] uppercase leading-tight tracking-[0.15em] text-neutral-50 md:text-[0.82rem]">
-                  Contact
-                </p>
-                <p className="mt-2 text-[0.75rem] leading-relaxed text-neutral-300 md:text-[0.84rem]">
-                  Visit the contact page for inquiry details and the public contact placeholder.
-                </p>
+                Contact
               </Link>
             </div>
           </div>
