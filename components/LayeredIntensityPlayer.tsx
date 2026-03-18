@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { IntensityLayerKey, IntensityLayerMap, LayeredTrack } from "@/content/gameMusic";
 
@@ -630,6 +631,19 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
 
       <div className="mb-6">
         <div className="relative aspect-video overflow-hidden rounded-[18px] border border-[#3A3A3E] bg-[radial-gradient(circle_at_top,#3a3a40_0%,#1a1b1f_48%,#101114_100%)] shadow-[0_24px_48px_rgba(0,0,0,0.42)]">
+          {!showVideoVisualizer && track.posterImage ? (
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#202127_0%,#121316_65%,#0b0c0e_100%)]">
+              <Image
+                src={track.posterImage}
+                alt={`${track.title} artwork`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 980px"
+                className="object-contain p-6 md:p-10"
+                priority
+              />
+            </div>
+          ) : null}
+
           {INTENSITY_LAYER_KEYS.map((key) => (
             <video
               key={key}
@@ -653,7 +667,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
           ))}
 
           {!showVideoVisualizer ? (
-            <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(180deg,rgba(15,16,18,0.92)_0%,rgba(11,12,14,0.98)_100%)] px-6 text-center">
+            <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(180deg,rgba(15,16,18,0.58)_0%,rgba(11,12,14,0.82)_100%)] px-6 text-center">
               <div className="space-y-3 md:space-y-4">
                 <p className="font-heading text-base uppercase tracking-[0.18em] text-neutral-100 md:text-[1.2rem]">
                   Visual Intensity Layers

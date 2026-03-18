@@ -30,6 +30,8 @@ export default function AboutPage() {
               </Link>
               <Link
                 href={siteConfig.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-full border border-accent px-8 py-3 text-center font-heading text-sm uppercase tracking-[0.16em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Resume

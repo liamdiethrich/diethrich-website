@@ -36,6 +36,6 @@ export const siteConfig = {
       href: "https://www.instagram.com/liamdiethrich/"
     }
   } satisfies Record<"email" | "instagram", ContactMethod>,
-  resumeUrl: "#",
+  resumeUrl: "/documents/liam-diethrich-resume.pdf",
   ctaUrl: "/film-music"
 };

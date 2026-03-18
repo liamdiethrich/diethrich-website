@@ -1,6 +1,7 @@
 import { Container } from "@/components/Container";
 import { FilmGridItem } from "@/components/FilmGridItem";
-import { filmMusicItems } from "@/content/filmMusic";
+import { AudioTrackCard } from "@/components/AudioTrackCard";
+import { filmMusicAudioTracks, filmMusicItems } from "@/content/filmMusic";
 import { LayeredIntensityPlayer } from "@/components/LayeredIntensityPlayer";
 import { PosterAudioCard } from "@/components/PosterAudioCard";
 import { layeredIntensityDemoTrack, smokeBreakMenuTrack } from "@/content/gameMusic";
@@ -29,6 +30,20 @@ export default function FilmMusicPage() {
             <div className="w-full">
               <PosterAudioCard track={smokeBreakMenuTrack} />
             </div>
+          </div>
+        </section>
+
+        <section id="audio-tracks" className="mt-16 md:mt-24">
+          <h2 className="mb-4 text-center font-heading text-[2rem] uppercase tracking-[0.2em] text-neutral-900 md:mb-5 md:text-left md:text-3xl md:tracking-[0.24em]">
+            Additional Music
+          </h2>
+          <p className="mb-8 max-w-[900px] text-center text-base leading-relaxed text-neutral-700 md:mb-10 md:text-left md:text-lg">
+            A selection of standalone tracks presented with full playback controls and progress tracking.
+          </p>
+          <div className="grid gap-4 md:gap-5 lg:grid-cols-2">
+            {filmMusicAudioTracks.map((track) => (
+              <AudioTrackCard key={track.slug} track={track} />
+            ))}
           </div>
         </section>
       </Container>

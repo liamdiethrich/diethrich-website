@@ -8,6 +8,13 @@ export type FilmMusicItem = {
   homeCaption?: string;
 };
 
+export type FilmMusicAudioTrack = {
+  slug: string;
+  title: string;
+  audioUrl: string;
+  imageUrl?: string;
+};
+
 export const filmMusicItems: FilmMusicItem[] = [
   {
     slug: "in-another-life-rescore",
@@ -39,5 +46,56 @@ export const filmMusicItems: FilmMusicItem[] = [
     videoUrl: "/video/featured/life-is-beautiful-scene-final.mp4",
     posterImage: "/images/featured/life-is-beautiful-poster-widescreen.jpg",
     homeCaption: "Recorded with a 52-piece orchestra at the Eastwood Scoring Stage at Warner Brothers Studios"
+  }
+];
+
+export const filmMusicAudioTracks: FilmMusicAudioTrack[] = [
+  {
+    slug: "to-rise-against",
+    title: "To Rise Against",
+    audioUrl: "/audio/film-music/to-rise-against.wav",
+    imageUrl: "/images/film-music/audio-tracks/to-rise-against.jpg"
+  },
+  {
+    slug: "final-descent",
+    title: "Final Descent",
+    audioUrl: "/audio/film-music/final-descent.wav",
+    imageUrl: "/images/film-music/audio-tracks/final-descent.jpg"
+  },
+  {
+    slug: "origins",
+    title: "Origins",
+    audioUrl: "/audio/film-music/origins.wav",
+    imageUrl: "/images/film-music/audio-tracks/origins.png"
+  },
+  {
+    slug: "transfigured-in-flame",
+    title: "Transfigured in Flame",
+    audioUrl: "/audio/film-music/transfigured-in-flame.wav",
+    imageUrl: "/images/film-music/audio-tracks/transfigured-in-flame.jpg"
+  },
+  {
+    slug: "serpents-uncoil",
+    title: "Serpents Uncoil",
+    audioUrl: "/audio/film-music/serpents-uncoil.wav",
+    imageUrl: "/images/film-music/audio-tracks/serpents-uncoil.jpg"
+  },
+  {
+    slug: "crimson-vows",
+    title: "Crimson Vows",
+    audioUrl: "/audio/film-music/crimson-vows.wav",
+    imageUrl: "/images/film-music/audio-tracks/crimson-vows.jpg"
+  },
+  {
+    slug: "simple-joy",
+    title: "Simple Joy",
+    audioUrl: "/audio/film-music/simple-joy.wav",
+    imageUrl: "/images/film-music/audio-tracks/simple-joy.jpg"
+  },
+  {
+    slug: "smoke-break",
+    title: "Smoke Break!",
+    audioUrl: "/audio/film-music/smoke-break.wav",
+    imageUrl: "/images/film-music/audio-tracks/smoke-break.jpg"
   }
 ];

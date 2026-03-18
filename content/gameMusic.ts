@@ -16,6 +16,7 @@ export type LayeredTrack = {
   mood: string;
   layers: IntensityLayerMap<string>;
   videoLayers: IntensityLayerMap<string>;
+  posterImage?: string;
   layerStartOffsets?: IntensityLayerMap<number>;
   layerLeadInSilence?: IntensityLayerMap<number>;
   loopDuration?: number;
@@ -51,6 +52,7 @@ export const layeredIntensityDemoTrack: LayeredTrack = {
   mood: "Adaptive Combat Suite",
   layers: intensityDemoAudioLayers,
   videoLayers: intensityDemoVideoLayers,
+  posterImage: "/images/game-music/ashes-and-steel.jpg",
   layerStartOffsets: {
     // Keep intro section while trimming only the accidental pre-note artifact on very intense.
     ambient: 0,
