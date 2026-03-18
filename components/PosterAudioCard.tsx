@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { NormalTrack } from "@/content/gameMusic";
 
 type PosterAudioCardProps = {
@@ -22,8 +22,16 @@ function formatDuration(seconds: number) {
 export function PosterAudioCard({ track }: PosterAudioCardProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [durationLabel, setDurationLabel] = useState("0:40");
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const imageAlt = `${track.title} artwork`;
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    return () => {
+      audio?.pause();
+    };
+  }, []);
 
   if (!track.audioUrl || !track.image) {
     return null;
@@ -39,54 +47,74 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
       return;
     }
 
+    if (duration > 0 && audioRef.current.currentTime >= duration) {
+      audioRef.current.currentTime = 0;
+      setCurrentTime(0);
+    }
+
     audioRef.current.play().catch(() => {
       setIsPlaying(false);
     });
   };
 
-  return (
-    <div className="w-full overflow-hidden rounded-[18px] border border-[#3A3A3E] bg-[#232326] text-neutral-100 shadow-[0_18px_38px_rgba(0,0,0,0.24)]">
-      <button
-        type="button"
-        onClick={togglePlay}
-        aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
-        className="group block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-      >
-        <div className="relative aspect-square overflow-hidden bg-black">
-          <Image
-            src={track.image}
-            alt={imageAlt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 980px"
-            className="object-cover transition duration-300 group-hover:scale-[1.015]"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.08)_0%,rgba(12,12,14,0.42)_100%)]" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="flex h-18 w-18 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition group-hover:bg-black/58 md:h-24 md:w-24">
-              {isPlaying ? (
-                <span className="text-lg font-semibold tracking-[0.08em] md:text-[1.6rem]">II</span>
-              ) : (
-                <span className="ml-1 inline-block h-0 w-0 border-y-[13px] border-y-transparent border-l-[20px] border-l-white md:border-y-[17px] md:border-l-[26px]" />
-              )}
-            </span>
-          </div>
-          <span className="absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/60 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.12em] text-white md:bottom-4 md:right-4 md:px-4 md:py-2 md:text-sm">
-            {durationLabel}
-          </span>
-        </div>
-      </button>
+  const handleSeek = (event: ChangeEvent<HTMLInputElement>) => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
 
-      <div className="flex items-center justify-between gap-4 p-4 md:p-5">
-        <div className="min-w-0">
-          <p className="font-heading text-[1rem] uppercase tracking-[0.12em] text-neutral-100 md:text-[1.25rem] md:tracking-[0.14em]">
-            {track.title}
-          </p>
-          <p className="text-[11px] uppercase tracking-[0.12em] text-neutral-300 md:text-sm">{track.mood}</p>
+    const nextTime = Number(event.target.value);
+    audio.currentTime = nextTime;
+    setCurrentTime(nextTime);
+  };
+
+  return (
+    <article className="overflow-hidden border border-white/10 bg-[#181514] text-ivory shadow-[0_22px_44px_rgba(0,0,0,0.24)]">
+      <div className="relative aspect-[4/5] overflow-hidden bg-black">
+        <Image
+          src={track.image}
+          alt={imageAlt}
+          fill
+          sizes="(max-width: 1279px) 100vw, 320px"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.04)_0%,rgba(12,12,14,0.18)_40%,rgba(12,12,14,0.62)_100%)]" />
+        <span className="absolute bottom-3 right-3 border border-white/12 bg-black/58 px-3 py-1.5 font-heading text-[0.64rem] uppercase tracking-[0.22em] text-ivory/76 backdrop-blur-sm md:bottom-4 md:right-4">
+          {formatDuration(duration)}
+        </span>
+      </div>
+
+      <div className="space-y-4 p-4 md:p-5">
+        <div className="space-y-2">
+          <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent/92">{track.mood}</p>
+          <h3 className="font-display text-[1.5rem] leading-[0.96] text-ivory md:text-[1.85rem]">{track.title}</h3>
         </div>
+
+        <div className="border-t border-white/8 pt-3.5">
+          <div className="mb-2 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.16em] text-ivory/42">
+            <div className="font-heading">{isPlaying ? "Playing" : "Ready"}</div>
+            <div>
+              {formatDuration(currentTime)} / {formatDuration(duration)}
+            </div>
+          </div>
+          <input
+            type="range"
+            min={0}
+            max={duration > 0 ? duration : 1}
+            step={0.01}
+            value={Math.min(currentTime, duration > 0 ? duration : 1)}
+            onChange={handleSeek}
+            disabled={duration <= 0}
+            aria-label={`Playback position for ${track.title}`}
+            className="music-range-dark w-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+          />
+        </div>
+
         <button
           type="button"
           onClick={togglePlay}
-          className="shrink-0 rounded-sm border border-accent/80 bg-[#1B1B1D] px-3.5 py-1.5 text-[11px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-5 md:py-2 md:text-sm"
+          aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-accent/60 px-5 font-heading text-[0.72rem] uppercase tracking-[0.22em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {isPlaying ? "Pause" : "Play"}
         </button>
@@ -99,11 +127,17 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
         className="sr-only"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        onEnded={() => setIsPlaying(false)}
+        onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
         onLoadedMetadata={(event) => {
-          setDurationLabel(formatDuration(event.currentTarget.duration));
+          setDuration(event.currentTarget.duration);
+          setCurrentTime(event.currentTarget.currentTime);
+        }}
+        onDurationChange={(event) => setDuration(event.currentTarget.duration)}
+        onEnded={(event) => {
+          setIsPlaying(false);
+          setCurrentTime(event.currentTarget.duration);
         }}
       />
-    </div>
+    </article>
   );
 }

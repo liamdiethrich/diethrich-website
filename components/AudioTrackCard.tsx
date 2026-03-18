@@ -6,6 +6,7 @@ import { FilmMusicAudioTrack } from "@/content/filmMusic";
 
 type AudioTrackCardProps = {
   track: FilmMusicAudioTrack;
+  index?: number;
 };
 
 function formatClockTime(seconds: number) {
@@ -19,11 +20,12 @@ function formatClockTime(seconds: number) {
   return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
 }
 
-export function AudioTrackCard({ track }: AudioTrackCardProps) {
+export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const trackNumber = typeof index === "number" ? String(index + 1).padStart(2, "0") : null;
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -65,60 +67,63 @@ export function AudioTrackCard({ track }: AudioTrackCardProps) {
   };
 
   return (
-    <div className="w-full overflow-hidden rounded-[18px] border border-[#3A3A3E] bg-[#232326] text-neutral-100 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-      <div className="flex flex-col md:flex-row">
-        <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-[#161618] md:w-[250px]">
+    <article className="group w-full overflow-hidden border border-black/10 bg-[#181413] text-ivory shadow-[0_20px_42px_rgba(23,18,16,0.12)]">
+      <div className="grid sm:grid-cols-[140px_minmax(0,1fr)]">
+        <div className="relative aspect-[5/4] overflow-hidden bg-[#111010] sm:aspect-auto sm:min-h-[152px]">
           {track.imageUrl ? (
             <Image
               src={track.imageUrl}
               alt={`${track.title} title card`}
               fill
-              sizes="(max-width: 768px) 100vw, 250px"
-              className="object-cover"
+              sizes="(max-width: 640px) 100vw, 140px"
+              className="object-cover transition duration-500 group-hover:scale-[1.01]"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,#3a3a40_0%,#1a1b1f_48%,#101114_100%)] px-6 text-center">
-              <p className="font-heading text-lg uppercase tracking-[0.18em] text-neutral-200 md:text-xl">
+              <p className="font-heading text-sm uppercase tracking-[0.18em] text-neutral-200 md:text-base">
                 {track.title}
               </p>
             </div>
           )}
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.08)_0%,rgba(10,10,12,0.45)_100%)]" />
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.04)_0%,rgba(10,10,12,0.42)_100%)]" />
+          {trackNumber ? (
+            <span className="absolute left-3 top-3 border border-white/10 bg-black/48 px-2.5 py-1 font-heading text-[0.62rem] uppercase tracking-[0.24em] text-ivory/78 backdrop-blur-sm">
+              {trackNumber}
+            </span>
+          ) : null}
+        </div>
+
+        <div className="min-w-0 p-4 md:p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0 space-y-1.5">
+              <h3 className="font-display text-[1.48rem] leading-[0.96] text-ivory md:text-[1.8rem]">
+                {track.title}
+              </h3>
+            </div>
             <button
               type="button"
               onClick={togglePlay}
               aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
-              className="flex h-18 w-18 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:h-20 md:w-20"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent/60 text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {isPlaying ? (
-                <span className="flex items-center gap-[5px]">
-                  <span className="h-5 w-[5px] bg-current md:h-6 md:w-[6px]" />
-                  <span className="h-5 w-[5px] bg-current md:h-6 md:w-[6px]" />
+                <span className="flex items-center gap-[4px]">
+                  <span className="h-4 w-[4px] bg-current" />
+                  <span className="h-4 w-[4px] bg-current" />
                 </span>
               ) : (
-                <span className="ml-[3px] inline-block h-0 w-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-current md:border-y-[12px] md:border-l-[18px]" />
+                <span className="ml-[2px] inline-block h-0 w-0 border-y-[6px] border-y-transparent border-l-[9px] border-l-current" />
               )}
             </button>
           </div>
-        </div>
 
-        <div className="flex min-w-0 flex-1 flex-col justify-between p-5 md:p-6">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div className="min-w-0">
-              <p className="font-heading text-[1rem] uppercase tracking-[0.16em] text-neutral-100 md:text-[1.2rem]">
-                {track.title}
-              </p>
-              <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-neutral-400 md:text-sm">
-                Audio Track
-              </p>
+          <div className="mt-5 border-t border-white/8 pt-3.5">
+            <div className="mb-2 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.16em] text-ivory/42">
+              <div className="font-heading">{trackNumber ? `${trackNumber} / Listen` : "Listen"}</div>
+              <div>
+                {formatClockTime(currentTime)} / {formatClockTime(duration)}
+              </div>
             </div>
-            <div className="text-[12px] uppercase tracking-[0.12em] text-neutral-300 md:text-sm">
-              {formatClockTime(currentTime)} / {formatClockTime(duration)}
-            </div>
-          </div>
-
-          <div className="mt-5">
             <input
               type="range"
               min={0}
@@ -128,11 +133,11 @@ export function AudioTrackCard({ track }: AudioTrackCardProps) {
               onChange={handleSeek}
               disabled={duration <= 0}
               aria-label={`Playback position for ${track.title}`}
-              className="w-full cursor-pointer accent-accent disabled:cursor-not-allowed disabled:opacity-50"
+              className="music-range-dark w-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
             />
-            <div className="mt-2 flex items-center justify-between text-xs uppercase tracking-[0.12em] text-neutral-500">
-              <span>{formatClockTime(currentTime)}</span>
-              <span>{formatClockTime(duration)}</span>
+            <div className="mt-2 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.16em] text-ivory/40">
+              <div className="font-heading text-accent/90">{isPlaying ? "Playing" : "Ready"}</div>
+              <div className="h-px flex-1 bg-white/8" />
             </div>
           </div>
         </div>
@@ -156,6 +161,6 @@ export function AudioTrackCard({ track }: AudioTrackCardProps) {
           setCurrentTime(event.currentTarget.duration);
         }}
       />
-    </div>
+    </article>
   );
 }

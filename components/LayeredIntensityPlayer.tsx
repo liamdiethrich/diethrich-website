@@ -125,6 +125,8 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
     : hasVideoActivity
       ? "Loading synchronized visuals..."
       : "Click Play to initialize synchronized visuals.";
+  const intensityLabel = sliderValue < 0.5 ? "Very Intense" : sliderValue < 1.5 ? "Intense" : "Ambient";
+  const playbackStateLabel = error ? "Error" : isLoading ? "Loading Layers" : isPlaying ? "Playing" : isReady ? "Ready" : "Idle";
 
   const markVideoStatus = useCallback((key: IntensityLayerKey, status: VideoLoadStatus) => {
     setVideoStatus((current) => {
@@ -606,143 +608,168 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
   }, [pauseVideos, stopSources]);
 
   return (
-    <div className="rounded-sm border border-[#3A3A3E] bg-[#232326] p-5 text-neutral-100 shadow-[0_10px_22px_rgba(0,0,0,0.24)] md:p-6">
-      <div className="mb-5 flex items-center gap-4 md:mb-6 md:gap-5">
-        <button
-          type="button"
-          onClick={togglePrimaryTransport}
-          aria-label={isPlaying ? "Pause layered intensity demo" : "Play layered intensity demo"}
-          className="flex h-14 w-14 items-center justify-center rounded-sm border border-accent/70 bg-[#1B1B1D] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:h-16 md:w-16"
-        >
-          {isPlaying ? (
-            <span className="flex items-center gap-[5px] md:gap-[6px]">
-              <span className="h-5 w-[5px] bg-current md:h-6 md:w-[6px]" />
-              <span className="h-5 w-[5px] bg-current md:h-6 md:w-[6px]" />
-            </span>
-          ) : (
-            <span className="ml-[3px] inline-block h-0 w-0 border-y-[10px] border-y-transparent border-l-[16px] border-l-current md:border-y-[12px] md:border-l-[18px]" />
-          )}
-        </button>
-        <div className="min-w-0">
-          <p className="font-heading text-[1rem] uppercase tracking-[0.14em] md:text-[1.35rem]">{track.title}</p>
-          <p className="text-[11px] uppercase tracking-[0.12em] text-neutral-300 md:text-sm">{track.mood}</p>
-        </div>
-      </div>
-
-      <div className="mb-6">
-        <div className="relative aspect-video overflow-hidden rounded-[18px] border border-[#3A3A3E] bg-[radial-gradient(circle_at_top,#3a3a40_0%,#1a1b1f_48%,#101114_100%)] shadow-[0_24px_48px_rgba(0,0,0,0.42)]">
-          {!showVideoVisualizer && track.posterImage ? (
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#202127_0%,#121316_65%,#0b0c0e_100%)]">
-              <Image
-                src={track.posterImage}
-                alt={`${track.title} artwork`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 980px"
-                className="object-contain p-6 md:p-10"
-                priority
-              />
+    <div className="border border-white/10 bg-[linear-gradient(180deg,#191514_0%,#151211_100%)] p-5 text-ivory shadow-[0_24px_52px_rgba(0,0,0,0.3)] md:p-6">
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_18.5rem] xl:items-start">
+        <div className="space-y-5">
+          <div className="flex flex-col gap-4 border-b border-white/8 pb-5 md:flex-row md:items-end md:justify-between">
+            <div className="min-w-0 space-y-2.5">
+              <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent">{track.mood}</p>
+              <h3 className="font-display text-[1.95rem] leading-[0.96] text-ivory md:text-[2.5rem]">{track.title}</h3>
             </div>
-          ) : null}
 
-          {INTENSITY_LAYER_KEYS.map((key) => (
-            <video
-              key={key}
-              ref={(node) => {
-                videoRefs.current[key] = node;
-              }}
-              src={track.videoLayers[key]}
-              preload="auto"
-              playsInline
-              muted
-              loop
-              onLoadStart={() => markVideoStatus(key, "loading")}
-              onLoadedData={() => markVideoStatus(key, "ready")}
-              onError={() => markVideoStatus(key, "error")}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-150 ease-out ${
-                showVideoVisualizer ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ opacity: showVideoVisualizer ? blendWeights[key] : 0 }}
-              aria-hidden="true"
-            />
-          ))}
+            <div className="self-start md:self-end">
+              <span className="border border-white/12 bg-white/[0.03] px-3 py-1.5 font-heading text-[0.66rem] uppercase tracking-[0.2em] text-ivory/64">
+                {playbackStateLabel}
+              </span>
+            </div>
+          </div>
 
-          {!showVideoVisualizer ? (
-            <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(180deg,rgba(15,16,18,0.58)_0%,rgba(11,12,14,0.82)_100%)] px-6 text-center">
-              <div className="space-y-3 md:space-y-4">
-                <p className="font-heading text-base uppercase tracking-[0.18em] text-neutral-100 md:text-[1.2rem]">
-                  Visual Intensity Layers
-                </p>
-                <p className="text-base leading-relaxed text-neutral-300 md:text-lg">{videoPlaceholderLabel}</p>
+          <div className="relative aspect-video overflow-hidden border border-white/10 bg-[radial-gradient(circle_at_top,#2b2828_0%,#171415_55%,#0f0d0d_100%)] shadow-[0_28px_54px_rgba(0,0,0,0.42)]">
+            {!showVideoVisualizer && track.posterImage ? (
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#202127_0%,#121316_65%,#0b0c0e_100%)]">
+                <Image
+                  src={track.posterImage}
+                  alt={`${track.title} artwork`}
+                  fill
+                  sizes="(max-width: 1279px) 100vw, 980px"
+                  className="object-contain p-6 md:p-10"
+                  priority
+                />
               </div>
+            ) : null}
+
+            {INTENSITY_LAYER_KEYS.map((key) => (
+              <video
+                key={key}
+                ref={(node) => {
+                  videoRefs.current[key] = node;
+                }}
+                src={track.videoLayers[key]}
+                preload="auto"
+                playsInline
+                muted
+                loop
+                onLoadStart={() => markVideoStatus(key, "loading")}
+                onLoadedData={() => markVideoStatus(key, "ready")}
+                onError={() => markVideoStatus(key, "error")}
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-150 ease-out ${
+                  showVideoVisualizer ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ opacity: showVideoVisualizer ? blendWeights[key] : 0 }}
+                aria-hidden="true"
+              />
+            ))}
+
+            {!showVideoVisualizer ? (
+              <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(180deg,rgba(15,16,18,0.5)_0%,rgba(11,12,14,0.78)_100%)] px-6 text-center">
+                <div className="space-y-3">
+                  <p className="font-heading text-[0.78rem] uppercase tracking-[0.24em] text-ivory/72 md:text-[0.86rem]">
+                    Visual Intensity Layers
+                  </p>
+                  <p className="mx-auto max-w-[24rem] text-[0.96rem] leading-[1.7] text-ivory/62 md:text-[1.02rem]">
+                    {videoPlaceholderLabel}
+                  </p>
+                </div>
+              </div>
+            ) : null}
+
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(12,12,14,0.32)_100%)]" />
+            <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),inset_0_-96px_120px_rgba(0,0,0,0.32)]" />
+          </div>
+        </div>
+
+        <div className="grid gap-4 xl:pt-[1px]">
+          <div className="border border-white/10 bg-black/16 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+            <div className="flex items-start justify-between gap-4">
+              <div className="space-y-2">
+                <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent">Transport</p>
+                <p className="font-display text-[1.35rem] leading-[0.96] text-ivory">{playbackStateLabel}</p>
+              </div>
+              <button
+                type="button"
+                onClick={togglePrimaryTransport}
+                aria-label={isPlaying ? "Pause layered intensity demo" : "Play layered intensity demo"}
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/60 text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                {isPlaying ? (
+                  <span className="flex items-center gap-[4px]">
+                    <span className="h-4 w-[4px] bg-current" />
+                    <span className="h-4 w-[4px] bg-current" />
+                  </span>
+                ) : (
+                  <span className="ml-[2px] inline-block h-0 w-0 border-y-[8px] border-y-transparent border-l-[12px] border-l-current" />
+                )}
+              </button>
             </div>
+
+            <div className="mt-4 flex flex-wrap gap-2.5">
+              <button
+                type="button"
+                onClick={play}
+                aria-label="Play layered intensity demo"
+                className="rounded-full border border-accent/60 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Play
+              </button>
+              <button
+                type="button"
+                onClick={pause}
+                aria-label="Pause layered intensity demo"
+                className="rounded-full border border-white/14 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-ivory/72 transition hover:border-white/26 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Pause
+              </button>
+              <button
+                type="button"
+                onClick={stop}
+                aria-label="Restart layered intensity demo"
+                className="rounded-full border border-white/14 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-ivory/72 transition hover:border-white/26 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Restart
+              </button>
+            </div>
+          </div>
+
+          <div className="border border-white/10 bg-black/16 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+            <div className="flex items-start justify-between gap-4">
+              <div className="space-y-2">
+                <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent">Intensity</p>
+                <p className="font-display text-[1.35rem] leading-[0.96] text-ivory">{intensityLabel}</p>
+              </div>
+              <p className="font-heading text-[0.66rem] uppercase tracking-[0.2em] text-ivory/46">0 - 2</p>
+            </div>
+
+            <div className="mt-4 space-y-3">
+              <label htmlFor={sliderId} className="sr-only">
+                Intensity
+              </label>
+              <input
+                id={sliderId}
+                aria-label="Intensity slider"
+                type="range"
+                min={0}
+                max={2}
+                step={0.01}
+                value={sliderValue}
+                onChange={onSliderChange}
+                className="music-range-dark w-full"
+              />
+              <div className="grid grid-cols-3 gap-2 font-heading text-[0.62rem] uppercase tracking-[0.22em] text-ivory/46">
+                <span>Very Intense</span>
+                <span className="text-center">Intense</span>
+                <span className="text-right">Ambient</span>
+              </div>
+              <p className="text-[0.94rem] leading-[1.65] text-ivory/58">Move through the musical intensity layers.</p>
+            </div>
+          </div>
+
+          {error ? (
+            <p className="border border-red-500/60 bg-red-900/30 px-4 py-3 text-sm uppercase tracking-[0.12em] text-red-100">
+              {error}
+            </p>
           ) : null}
-
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05)_0%,rgba(12,12,14,0.34)_100%)]" />
-          <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04),inset_0_-90px_120px_rgba(0,0,0,0.34)]" />
         </div>
       </div>
-
-      <div className="flex flex-wrap gap-2.5 md:gap-3">
-        <button
-          type="button"
-          onClick={play}
-          aria-label="Play layered intensity demo"
-          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-4 py-2 text-[11px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-5 md:py-2.5 md:text-sm"
-        >
-          Play
-        </button>
-        <button
-          type="button"
-          onClick={pause}
-          aria-label="Pause layered intensity demo"
-          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-4 py-2 text-[11px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-5 md:py-2.5 md:text-sm"
-        >
-          Pause
-        </button>
-        <button
-          type="button"
-          onClick={stop}
-          aria-label="Restart layered intensity demo"
-          className="rounded-sm border border-accent/80 bg-[#1B1B1D] px-4 py-2 text-[11px] uppercase tracking-[0.14em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:px-5 md:py-2.5 md:text-sm"
-        >
-          Restart
-        </button>
-        <p className="self-center text-[12px] uppercase tracking-[0.12em] text-neutral-300 md:text-sm">
-          {isLoading ? "Loading layers..." : isPlaying ? "Playing" : isReady ? "Ready" : "Idle"}
-        </p>
-      </div>
-
-      <div className="mt-6 space-y-3.5 rounded-sm border border-[#3A3A3E] bg-[#1E1E20] p-4 md:space-y-4 md:p-5">
-        <label htmlFor={sliderId} className="font-heading text-sm uppercase tracking-[0.14em] text-neutral-300 md:text-base">
-          Intensity
-        </label>
-        <input
-          id={sliderId}
-          aria-label="Intensity slider"
-          type="range"
-          min={0}
-          max={2}
-          step={0.01}
-          value={sliderValue}
-          onChange={onSliderChange}
-          className="w-full accent-accent"
-        />
-        <div className="grid grid-cols-3 gap-2 text-[11px] uppercase tracking-[0.11em] text-neutral-300 md:text-sm">
-          <span>Very Intense</span>
-          <span className="text-center">Intense</span>
-          <span className="text-right">Ambient</span>
-        </div>
-      </div>
-
-      <p className="mt-5 text-base leading-relaxed text-neutral-300 md:text-lg">
-        Drag the slider to move through musical intensity layers.
-      </p>
-
-      {error ? (
-        <p className="mt-5 rounded-sm border border-red-500/60 bg-red-900/30 px-4 py-3 text-sm uppercase tracking-[0.12em] text-red-100">
-          {error}
-        </p>
-      ) : null}
     </div>
   );
 }

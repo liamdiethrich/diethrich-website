@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { MouseEvent } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/content/site";
 import { Container } from "./Container";
 
@@ -11,6 +11,7 @@ function isActivePath(pathname: string, href: string) {
   if (href === "/") {
     return pathname === "/";
   }
+
   return pathname.startsWith(href);
 }
 
@@ -21,7 +22,7 @@ export function Header() {
 
   useEffect(() => {
     const onScroll = () => {
-      const threshold = pathname === "/" ? Math.max(window.innerHeight - 140, 120) : 0;
+      const threshold = pathname === "/" ? Math.max(window.innerHeight - 180, 120) : 0;
       setIsScrolled(window.scrollY > threshold);
     };
 
@@ -48,14 +49,15 @@ export function Header() {
   }, [mobileMenuOpen]);
 
   const transparentHomeHeader = pathname === "/" && !isScrolled && !mobileMenuOpen;
-
-  const headerClassName = useMemo(() => {
-    if (transparentHomeHeader) {
-      return "bg-transparent";
-    }
-
-    return "bg-canvas/95 backdrop-blur-sm shadow-sm";
-  }, [transparentHomeHeader]);
+  const shellClassName = transparentHomeHeader
+    ? "border-transparent bg-transparent text-ivory"
+    : "border-b border-black/10 bg-paper/92 text-ink shadow-[0_16px_36px_rgba(23,18,16,0.08)] backdrop-blur-xl";
+  const linkClassName = transparentHomeHeader
+    ? "text-ivory/78 hover:text-ivory"
+    : "text-ink/72 hover:text-ink";
+  const buttonClassName = transparentHomeHeader
+    ? "border-white/18 text-ivory hover:border-accent hover:bg-white/6"
+    : "border-black/10 text-ink hover:border-accent hover:bg-white/45";
 
   const handleMobileNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (pathname === href) {
@@ -69,25 +71,31 @@ export function Header() {
   };
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${headerClassName}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${shellClassName}`}>
       <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
         <div className="flex min-h-[76px] items-center gap-4 md:min-h-[92px] md:gap-10">
           <Link
             href="/"
-            className="font-heading text-[1.08rem] uppercase leading-[1.05] tracking-[0.2em] text-accent transition-opacity hover:opacity-75 sm:text-[1.2rem] md:text-[2.05rem] md:tracking-[0.22em]"
+            className={`inline-flex items-center font-heading text-[1.02rem] uppercase leading-none tracking-[0.32em] transition-opacity hover:opacity-75 sm:text-[1.04rem] md:text-[1.28rem] ${
+              transparentHomeHeader ? "text-ivory" : "text-ink"
+            }`}
           >
             {siteConfig.logoText}
           </Link>
 
-          <nav aria-label="Primary" className="ml-auto hidden items-center gap-8 md:flex">
+          <nav aria-label="Primary" className="ml-auto hidden items-center gap-7 lg:flex xl:gap-9">
             {siteConfig.navLinks.map((item) => {
               const active = isActivePath(pathname, item.href);
+
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative font-heading text-[1.45rem] leading-none tracking-[0.04em] text-accent transition-opacity hover:opacity-70 ${
-                    active ? "after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:bg-accent" : ""
+                  aria-current={active ? "page" : undefined}
+                  className={`relative font-heading text-[0.82rem] uppercase tracking-[0.24em] transition ${
+                    active ? "text-accent" : linkClassName
+                  } after:absolute after:-bottom-2 after:left-0 after:h-px after:transition-all ${
+                    active ? "after:w-full after:bg-accent" : "after:w-0 hover:after:w-full hover:after:bg-current"
                   }`}
                 >
                   {item.label}
@@ -96,12 +104,19 @@ export function Header() {
             })}
           </nav>
 
+          <Link
+            href={siteConfig.contactUrl}
+            className={`hidden min-h-11 items-center justify-center rounded-full border bg-white/[0.02] px-5 font-heading text-[0.76rem] uppercase tracking-[0.22em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:inline-flex ${buttonClassName}`}
+          >
+            Contact
+          </Link>
+
           <button
             type="button"
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen((current) => !current)}
-            className="ml-auto flex h-11 w-11 items-center justify-center rounded-sm border border-accent/30 text-accent transition hover:border-accent/60 hover:bg-accent/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
+            className={`ml-auto flex h-11 w-11 items-center justify-center rounded-full border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden ${buttonClassName}`}
           >
             <span className="relative h-4 w-5">
               <span
@@ -121,44 +136,25 @@ export function Header() {
               />
             </span>
           </button>
-
-          {siteConfig.socialLinks.length > 0 ? (
-            <div className="hidden items-center gap-2 pl-2 md:flex">
-              {siteConfig.socialLinks.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  aria-label={item.label}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-accent text-[10px] font-semibold uppercase tracking-widest text-accent transition hover:bg-accent hover:text-black"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          ) : null}
         </div>
       </Container>
 
       {mobileMenuOpen ? (
-        <>
-          <button
-            type="button"
-            aria-label="Close navigation menu"
-            onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-x-0 bottom-0 top-[76px] bg-black/20 md:hidden"
-          />
-          <div className="border-t border-neutral-200 bg-canvas/95 shadow-lg backdrop-blur-sm md:hidden">
-            <Container className="max-w-none px-4 sm:px-5">
-              <nav aria-label="Mobile primary" className="flex flex-col py-3">
+        <div className="border-t border-black/10 bg-paper text-ink shadow-[0_22px_40px_rgba(23,18,16,0.08)] lg:hidden">
+          <Container className="max-w-none px-4 sm:px-5">
+            <div className="flex min-h-[calc(100svh-76px)] flex-col justify-between py-6">
+              <nav aria-label="Mobile primary" className="flex flex-col border-t border-black/10">
                 {siteConfig.navLinks.map((item) => {
                   const active = isActivePath(pathname, item.href);
+
                   return (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={(event) => handleMobileNavClick(event, item.href)}
-                      className={`border-b border-neutral-200/80 py-4 font-heading text-[1.15rem] uppercase tracking-[0.14em] text-accent transition-opacity active:opacity-70 ${
-                        active ? "opacity-100" : "opacity-80"
+                      aria-current={active ? "page" : undefined}
+                      className={`border-b border-black/10 py-5 font-heading text-[1rem] uppercase tracking-[0.22em] transition ${
+                        active ? "text-accent" : "text-ink/82"
                       }`}
                     >
                       {item.label}
@@ -166,9 +162,22 @@ export function Header() {
                   );
                 })}
               </nav>
-            </Container>
-          </div>
-        </>
+
+              <div className="space-y-5 pb-4">
+                <Link
+                  href={siteConfig.contactUrl}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/12 bg-white/50 px-6 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >
+                  Contact
+                </Link>
+                <p className="max-w-[20rem] text-[0.96rem] leading-relaxed text-ink/72">
+                  Award-winning music for film, games, and the concert stage.
+                </p>
+              </div>
+            </div>
+          </Container>
+        </div>
       ) : null}
     </header>
   );

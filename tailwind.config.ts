@@ -9,12 +9,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: "#E7E7E7",
+        canvas: "#DED7CC",
+        paper: "#ECE5DA",
+        ivory: "#F6F0E7",
+        stone: "#B7A999",
+        ink: "#171210",
+        charcoal: "#211B18",
         accent: "#F36424",
-        footer: "#1A1A1C"
+        footer: "#14110F"
       },
       fontFamily: {
         heading: ["var(--font-barlow-condensed)", "sans-serif"],
+        display: ["var(--font-cormorant-garamond)", "serif"],
         body: ["var(--font-source-sans)", "sans-serif"]
       },
       letterSpacing: {

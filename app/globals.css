@@ -4,6 +4,11 @@
 
 :root {
   color-scheme: light;
+  --color-canvas: #ded7cc;
+  --color-paper: #ece5da;
+  --color-ivory: #f6f0e7;
+  --color-ink: #171210;
+  --color-accent: #f36424;
 }
 
 * {
@@ -14,7 +19,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  background: #e7e7e7;
+  background: var(--color-canvas);
 }
 
 a {
@@ -31,4 +36,71 @@ textarea {
 
 textarea {
   resize: vertical;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(23, 18, 16, 0.02) 100%);
+  color: var(--color-ink);
+}
+
+.music-range,
+.music-range-dark {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+.music-range::-webkit-slider-runnable-track,
+.music-range-dark::-webkit-slider-runnable-track {
+  height: 1px;
+  border-radius: 999px;
+}
+
+.music-range::-moz-range-track,
+.music-range-dark::-moz-range-track {
+  height: 1px;
+  border: 0;
+  border-radius: 999px;
+}
+
+.music-range::-webkit-slider-runnable-track,
+.music-range::-moz-range-track {
+  background: rgba(23, 18, 16, 0.2);
+}
+
+.music-range-dark::-webkit-slider-runnable-track,
+.music-range-dark::-moz-range-track {
+  background: rgba(246, 240, 231, 0.18);
+}
+
+.music-range::-webkit-slider-thumb,
+.music-range-dark::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin-top: -0.4rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 1px rgba(23, 18, 16, 0.18), 0 6px 12px rgba(23, 18, 16, 0.18);
+}
+
+.music-range::-moz-range-thumb,
+.music-range-dark::-moz-range-thumb {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 1px rgba(23, 18, 16, 0.18), 0 6px 12px rgba(23, 18, 16, 0.18);
+}
+
+::selection {
+  background: rgba(243, 100, 36, 0.78);
+  color: var(--color-ink);
 }

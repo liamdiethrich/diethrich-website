@@ -42,7 +42,9 @@ export function PosterVideoCard({
   };
 
   return (
-    <div className={`relative aspect-video overflow-hidden rounded-[2px] border border-neutral-300 bg-black shadow-[0_8px_22px_rgba(0,0,0,0.12)] ${className}`}>
+    <div
+      className={`group relative aspect-video overflow-hidden border border-black/10 bg-black shadow-[0_24px_48px_rgba(23,18,16,0.1)] transition-shadow duration-300 ${className}`}
+    >
       <video
         ref={videoRef}
         src={src}
@@ -60,13 +62,20 @@ export function PosterVideoCard({
           aria-label={`Play video: ${title}`}
           className="absolute inset-0 block w-full text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          <Image src={poster} alt="" fill sizes={sizes} className={posterFitClassName} />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.12)_0%,rgba(10,10,12,0.32)_100%)]" />
+          <Image
+            src={poster}
+            alt=""
+            fill
+            sizes={sizes}
+            className={`${posterFitClassName} transition duration-500 group-hover:scale-[1.008]`}
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.06)_0%,rgba(10,10,12,0.38)_52%,rgba(10,10,12,0.62)_100%)]" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/35 bg-black/45 text-white shadow-[0_12px_24px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-black/58 md:h-20 md:w-20">
-              <span className="ml-1 inline-block h-0 w-0 border-y-[11px] border-y-transparent border-l-[17px] border-l-white md:border-y-[13px] md:border-l-[20px]" />
+            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/18 bg-black/44 text-white shadow-[0_16px_32px_rgba(0,0,0,0.34)] ring-1 ring-white/10 backdrop-blur-sm transition group-hover:border-accent/70 group-hover:bg-black/60 md:h-[4.5rem] md:w-[4.5rem]">
+              <span className="ml-1 inline-block h-0 w-0 border-y-[11px] border-y-transparent border-l-[17px] border-l-white md:border-y-[12px] md:border-l-[19px]" />
             </span>
           </div>
+          <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05),inset_0_-64px_90px_rgba(0,0,0,0.28)]" />
         </button>
       ) : null}
     </div>

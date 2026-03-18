@@ -19,7 +19,7 @@ type ValidatedFieldName = "name" | "email" | "message";
 
 type FormErrors = Partial<Record<ValidatedFieldName, string>>;
 
-const projectTypeOptions = ["Film Music", "Game Music", "Concert Commission", "Collaboration", "Other"] as const;
+const projectTypeOptions = ["Film Music", "Game Music", "Concert Commission", "Creative Collaboration", "Other"] as const;
 
 const initialValues: FormValues = {
   name: "",
@@ -30,9 +30,9 @@ const initialValues: FormValues = {
 };
 
 const inputClassName =
-  "h-12 w-full rounded-[10px] border border-neutral-200 bg-white px-4 text-[0.98rem] text-neutral-900 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/15 md:text-[1rem]";
+  "h-12 w-full border border-black/12 bg-white/82 px-4 text-[0.98rem] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.82)] transition-[border-color,box-shadow,background-color] placeholder:text-ink/34 focus-visible:border-accent focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/14 md:text-[1rem]";
 
-const labelClassName = "font-heading text-[0.76rem] uppercase leading-none tracking-[0.18em] text-neutral-800 md:text-[0.84rem]";
+const labelClassName = "font-heading text-[0.72rem] uppercase leading-none tracking-[0.2em] text-ink/70 md:text-[0.8rem]";
 
 const errorClassName = "text-[0.84rem] leading-relaxed text-accent";
 
@@ -151,93 +151,98 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="mx-auto max-w-[35rem] space-y-4 sm:space-y-5">
-      <div className="space-y-2">
-        <label htmlFor="name" className={labelClassName}>
-          Name
-        </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          autoComplete="name"
-          required
-          value={values.name}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          aria-invalid={Boolean(errors.name)}
-          aria-describedby={errors.name ? "name-error" : undefined}
-          className={inputClassName}
-        />
-        {errors.name ? (
-          <p id="name-error" className={errorClassName}>
-            {errors.name}
-          </p>
-        ) : null}
+    <form noValidate onSubmit={handleSubmit} className="mx-auto max-w-[38rem] space-y-5 sm:space-y-6">
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="space-y-2.5">
+          <label htmlFor="name" className={labelClassName}>
+            Name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autoComplete="name"
+            required
+            value={values.name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "name-error" : undefined}
+            className={inputClassName}
+          />
+          {errors.name ? (
+            <p id="name-error" className={errorClassName}>
+              {errors.name}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="space-y-2.5">
+          <label htmlFor="email" className={labelClassName}>
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            required
+            value={values.email}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "email-error" : undefined}
+            className={inputClassName}
+          />
+          {errors.email ? (
+            <p id="email-error" className={errorClassName}>
+              {errors.email}
+            </p>
+          ) : null}
+        </div>
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="email" className={labelClassName}>
-          Email
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          value={values.email}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          aria-invalid={Boolean(errors.email)}
-          aria-describedby={errors.email ? "email-error" : undefined}
-          className={inputClassName}
-        />
-        {errors.email ? (
-          <p id="email-error" className={errorClassName}>
-            {errors.email}
-          </p>
-        ) : null}
-      </div>
-
-      <div className="space-y-2">
-        <label htmlFor="projectType" className={labelClassName}>
-          Project Type
-        </label>
-        <select
-          id="projectType"
-          name="projectType"
-          value={values.projectType}
-          onChange={handleChange}
-          className={inputClassName}
-        >
-          <option value="">
-            Select a project type
-          </option>
-          {projectTypeOptions.map((option) => (
-            <option key={option} value={option}>
-              {option}
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="space-y-2.5">
+          <label htmlFor="projectType" className={labelClassName}>
+            Project Type
+          </label>
+          <select
+            id="projectType"
+            name="projectType"
+            value={values.projectType}
+            onChange={handleChange}
+            className={inputClassName}
+          >
+            <option value="">
+              Select a project type
             </option>
-          ))}
-        </select>
+            {projectTypeOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="space-y-2.5">
+          <label htmlFor="timeline" className={labelClassName}>
+            Timeline
+          </label>
+          <input
+            id="timeline"
+            name="timeline"
+            type="text"
+            autoComplete="off"
+            value={values.timeline}
+            onChange={handleChange}
+            placeholder="Optional"
+            className={inputClassName}
+          />
+        </div>
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="timeline" className={labelClassName}>
-          Timeline
-        </label>
-        <input
-          id="timeline"
-          name="timeline"
-          type="text"
-          autoComplete="off"
-          value={values.timeline}
-          onChange={handleChange}
-          className={inputClassName}
-        />
-      </div>
-
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <label htmlFor="message" className={labelClassName}>
           Message
         </label>
@@ -251,7 +256,7 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
           onChange={handleChange}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className="min-h-[168px] w-full rounded-[10px] border border-neutral-200 bg-white px-4 py-3.5 text-[0.98rem] leading-relaxed text-neutral-900 shadow-[0_1px_2px_rgba(0,0,0,0.03)] transition focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/15 md:min-h-[184px] md:text-[1rem]"
+          className="min-h-[180px] w-full border border-black/12 bg-white/82 px-4 py-3.5 text-[0.98rem] leading-relaxed text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.82)] transition-[border-color,box-shadow,background-color] placeholder:text-ink/34 focus-visible:border-accent focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/14 md:min-h-[208px] md:text-[1rem]"
         />
         {errors.message ? (
           <p id="message-error" className={errorClassName}>
@@ -260,21 +265,29 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
         ) : null}
       </div>
 
-      <div className="space-y-2.5 pt-1">
-        <button
-          type="submit"
-          className="w-full rounded-full bg-accent px-8 py-3.5 text-center font-heading text-[0.78rem] uppercase tracking-[0.16em] text-black transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-auto sm:min-w-[9.5rem] md:text-[0.82rem]"
-        >
-          Send Inquiry
-        </button>
-        <p className="max-w-[26rem] text-[0.76rem] leading-relaxed text-neutral-500 md:text-[0.8rem]">
-          Sending opens your default email app with a drafted inquiry.
-        </p>
-        {showHandoffMessage ? (
-          <p aria-live="polite" className="max-w-[26rem] text-[0.76rem] leading-relaxed text-neutral-600 md:text-[0.8rem]">
-            Your draft should open in your email app. If it does not, please try again with your email client enabled.
-          </p>
-        ) : null}
+      <div className="border-t border-black/10 pt-5">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
+          <button
+            type="submit"
+            className="w-full rounded-full border border-accent/80 bg-accent px-8 py-3.5 text-center font-heading text-[0.78rem] uppercase tracking-[0.18em] text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.34),0_14px_28px_rgba(0,0,0,0.08)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-auto sm:min-w-[10rem] md:order-2 md:text-[0.82rem]"
+          >
+            Send Inquiry
+          </button>
+          <div className="space-y-2 md:order-1">
+            <p className="max-w-[28rem] text-[0.78rem] leading-relaxed text-ink/52 md:text-[0.82rem]">
+              Sending opens your default email app with a drafted inquiry.
+            </p>
+            {showHandoffMessage ? (
+              <p
+                aria-live="polite"
+                className="max-w-[28rem] text-[0.78rem] leading-relaxed text-ink/62 md:text-[0.82rem]"
+              >
+                Your draft should open in your email app. If it does not, please try again with your email client
+                enabled.
+              </p>
+            ) : null}
+          </div>
+        </div>
       </div>
     </form>
   );

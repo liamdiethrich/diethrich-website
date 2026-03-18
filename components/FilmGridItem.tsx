@@ -1,13 +1,15 @@
+import Link from "next/link";
 import { FilmMusicItem } from "@/content/filmMusic";
 import { PosterVideoCard } from "./PosterVideoCard";
 
 type FilmGridItemProps = {
   item: FilmMusicItem;
+  variant?: "feature" | "standard";
 };
 
 function getVideoEmbed(title: string, url: string) {
   return (
-    <div className="aspect-video overflow-hidden rounded-[2px] border border-neutral-300 bg-black shadow-[0_8px_22px_rgba(0,0,0,0.12)]">
+    <div className="aspect-video overflow-hidden border border-black/10 bg-black shadow-[0_24px_48px_rgba(23,18,16,0.1)] transition-shadow duration-300">
       <iframe
         title={title}
         src={url}
@@ -29,22 +31,74 @@ function getLocalVideo(item: FilmMusicItem) {
       src={item.videoUrl}
       poster={item.posterImage}
       title={item.title}
+      className="transition-shadow duration-300 group-hover:shadow-[0_30px_56px_rgba(23,18,16,0.14)]"
       objectFitClassName="object-contain"
       posterFitClassName="object-cover"
     />
   );
 }
 
-export function FilmGridItem({ item }: FilmGridItemProps) {
-  return (
-    <article className="space-y-4 md:space-y-5">
-      <div className="text-neutral-900">
-        <h2 className="font-heading text-[1.12rem] font-bold tracking-[0.08em] text-neutral-900 md:text-[1.8rem] md:tracking-[0.12em]">
-          {item.title}
-        </h2>
-      </div>
+export function FilmGridItem({ item, variant = "standard" }: FilmGridItemProps) {
+  const caption = item.homeCaption?.trim();
+  const isFeature = variant === "feature";
 
+  return (
+    <article className={`group ${isFeature ? "space-y-6 md:space-y-7" : "space-y-5 md:space-y-6"}`}>
       {item.videoUrl ? getLocalVideo(item) : item.embedUrl ? getVideoEmbed(item.title, item.embedUrl) : null}
+
+      <div className={`border-b border-black/10 ${isFeature ? "pb-6 md:pb-7" : "pb-5"}`}>
+        <div className={`grid gap-4 ${isFeature ? "md:grid-cols-[minmax(0,1fr)_minmax(12rem,18rem)] md:gap-7" : ""}`}>
+          <div className="space-y-2.5">
+            {item.sourceTitle ? (
+              <p className="font-heading text-[0.72rem] uppercase tracking-[0.22em] text-accent">{item.sourceTitle}</p>
+            ) : null}
+            <Link
+              href={`/film-music/${item.slug}`}
+              className="inline-block transition hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <h2
+                className={`font-display leading-[0.96] text-ink transition-colors group-hover:text-accent ${
+                  isFeature ? "text-[2.2rem] md:text-[3rem]" : "text-[1.8rem] md:text-[2.2rem]"
+                }`}
+              >
+                {item.title}
+              </h2>
+            </Link>
+            {!isFeature && caption ? (
+              <p className="max-w-[38rem] text-[0.98rem] leading-[1.68] text-ink/70 md:text-[1rem]">{caption}</p>
+            ) : null}
+          </div>
+
+          {isFeature ? (
+            <div className="space-y-3 md:pt-1">
+              {caption ? (
+                <p className="text-[0.98rem] leading-[1.68] text-ink/70 md:text-[1rem]">{caption}</p>
+              ) : (
+                <div />
+              )}
+              <Link
+                href={`/film-music/${item.slug}`}
+                className="inline-flex items-center gap-3 font-heading text-[0.74rem] uppercase tracking-[0.22em] text-ink/46 transition hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                <span className="h-px w-8 bg-current/45 transition-all group-hover:w-10 group-hover:bg-accent" />
+                Open Work
+              </Link>
+            </div>
+          ) : null}
+        </div>
+
+        {!isFeature ? (
+          <div className="mt-4">
+            <Link
+              href={`/film-music/${item.slug}`}
+              className="inline-flex items-center gap-3 font-heading text-[0.74rem] uppercase tracking-[0.22em] text-ink/42 transition hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              <span className="h-px w-8 bg-current/45 transition-all group-hover:w-10 group-hover:bg-accent" />
+              Open Work
+            </Link>
+          </div>
+        ) : null}
+      </div>
     </article>
   );
 }

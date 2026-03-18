@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Source_Sans_3 } from "next/font/google";
+import { Barlow_Condensed, Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import "./globals.css";
@@ -14,6 +14,12 @@ const sourceSans = Source_Sans_3({
   subsets: ["latin"],
   variable: "--font-source-sans",
   weight: ["300", "400", "500", "600", "700"]
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  variable: "--font-cormorant-garamond",
+  weight: ["400", "500", "600", "700"]
 });
 
 export const metadata: Metadata = {
@@ -42,7 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${barlowCondensed.variable} ${sourceSans.variable} bg-canvas font-body text-neutral-900 antialiased`}>
+      <body
+        className={`${barlowCondensed.variable} ${sourceSans.variable} ${cormorantGaramond.variable} bg-canvas font-body text-ink antialiased`}
+      >
         <Header />
         <main className="min-h-screen pt-[76px] md:pt-[92px]">{children}</main>
         <Footer />
