@@ -28,45 +28,13 @@ export default function ContactPage() {
                   Working Together
                 </p>
                 <p className="max-w-[32rem] text-[0.98rem] leading-[1.7] text-neutral-700 md:text-[1.04rem] md:leading-[1.72]">
-                  I welcome inquiries related to film music, game music, concert works, and creative collaborations.
+                  Contact me for film music, game music, concert works, and creative collaborations.
                 </p>
                 <ul className="space-y-2 pt-1 font-heading text-[0.9rem] uppercase tracking-[0.15em] text-neutral-900 sm:text-[0.94rem] md:text-[1.02rem]">
                   {inquiryAreas.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
-              </section>
-
-              <section className="space-y-4 border-t border-neutral-200/80 pt-6 sm:pt-7">
-                <p className="font-heading text-[0.72rem] uppercase tracking-[0.22em] text-accent md:text-[0.8rem]">
-                  Direct
-                </p>
-                <div className="space-y-4">
-                  {[siteConfig.contact.email, siteConfig.contact.instagram].map((item) => (
-                    <div key={item.label} className="space-y-1.5">
-                      <p className="font-heading text-[0.76rem] uppercase tracking-[0.18em] text-neutral-500">
-                        {item.label}
-                      </p>
-                      <a
-                        href={item.href}
-                        target={item.href.startsWith("http") ? "_blank" : undefined}
-                        rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="inline-flex w-fit break-words text-[0.98rem] leading-relaxed text-neutral-800 transition hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:text-[1.04rem]"
-                      >
-                        {item.value}
-                      </a>
-                    </div>
-                  ))}
-                </div>
-              </section>
-
-              <section className="space-y-4 border-t border-neutral-200/80 pt-6 sm:pt-7">
-                <p className="font-heading text-[0.72rem] uppercase tracking-[0.22em] text-accent md:text-[0.8rem]">
-                  Note
-                </p>
-                <p className="max-w-[32rem] text-[0.98rem] leading-[1.7] text-neutral-700 md:text-[1.04rem] md:leading-[1.72]">
-                  The more context you can share about timing, format, references, and creative goals, the better.
-                </p>
               </section>
             </div>
 

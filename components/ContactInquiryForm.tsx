@@ -272,14 +272,7 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
         </p>
         {showHandoffMessage ? (
           <p aria-live="polite" className="max-w-[26rem] text-[0.76rem] leading-relaxed text-neutral-600 md:text-[0.8rem]">
-            Your draft should open in your email app. If not, you can email{" "}
-            <a
-              href={`mailto:${emailAddress}`}
-              className="text-neutral-800 transition hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              {emailAddress}
-            </a>{" "}
-            directly.
+            Your draft should open in your email app. If it does not, please try again with your email client enabled.
           </p>
         ) : null}
       </div>
