@@ -19,6 +19,7 @@ export function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const linkedIn = siteConfig.socialLinks.find((item) => item.label === "LinkedIn");
 
   useEffect(() => {
     const onScroll = () => {
@@ -58,6 +59,9 @@ export function Header() {
   const buttonClassName = transparentHomeHeader
     ? "border-white/18 text-ivory hover:border-accent hover:bg-white/6"
     : "border-black/10 text-ink hover:border-accent hover:bg-white/45";
+  const socialButtonClassName = transparentHomeHeader
+    ? "border-white/18 bg-white/[0.02] text-ivory hover:border-accent hover:bg-white/6"
+    : "border-black/10 bg-white/35 text-ink hover:border-accent hover:bg-white/60";
 
   const handleMobileNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (pathname === href) {
@@ -111,31 +115,69 @@ export function Header() {
             Contact
           </Link>
 
-          <button
-            type="button"
-            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen((current) => !current)}
-            className={`ml-auto flex h-11 w-11 items-center justify-center rounded-full border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden ${buttonClassName}`}
-          >
-            <span className="relative h-4 w-5">
-              <span
-                className={`absolute left-0 top-0 block h-px w-full bg-current transition ${
-                  mobileMenuOpen ? "translate-y-[7px] rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-[7px] block h-px w-full bg-current transition ${
-                  mobileMenuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`absolute left-0 top-[14px] block h-px w-full bg-current transition ${
-                  mobileMenuOpen ? "-translate-y-[7px] -rotate-45" : ""
-                }`}
-              />
-            </span>
-          </button>
+          {linkedIn ? (
+            <a
+              href={linkedIn.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit Liam Diethrich on LinkedIn"
+              className={`hidden h-11 w-11 items-center justify-center rounded-full border shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:inline-flex ${socialButtonClassName}`}
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-[1.2rem] w-[1.2rem] fill-current"
+              >
+                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 10.06H5.67V18.33H8.34V10.06ZM7 5.8A1.56 1.56 0 1 0 7 8.92A1.56 1.56 0 1 0 7 5.8ZM18.33 13.25C18.33 10.73 16.98 9.56 15.18 9.56C13.73 9.56 13.08 10.36 12.71 10.92V10.06H10.04L10.07 18.33H12.74V13.71C12.74 13.46 12.76 13.21 12.84 13.03C13.04 12.53 13.49 12.01 14.25 12.01C15.25 12.01 15.66 12.77 15.66 13.88V18.33H18.33V13.25Z" />
+              </svg>
+            </a>
+          ) : null}
+
+          <div className="ml-auto flex items-center gap-3 lg:hidden">
+            {linkedIn ? (
+              <a
+                href={linkedIn.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Visit Liam Diethrich on LinkedIn"
+                className={`flex h-11 w-11 items-center justify-center rounded-full border shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${socialButtonClassName}`}
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-[1.2rem] w-[1.2rem] fill-current"
+                >
+                  <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.34 10.06H5.67V18.33H8.34V10.06ZM7 5.8A1.56 1.56 0 1 0 7 8.92A1.56 1.56 0 1 0 7 5.8ZM18.33 13.25C18.33 10.73 16.98 9.56 15.18 9.56C13.73 9.56 13.08 10.36 12.71 10.92V10.06H10.04L10.07 18.33H12.74V13.71C12.74 13.46 12.76 13.21 12.84 13.03C13.04 12.53 13.49 12.01 14.25 12.01C15.25 12.01 15.66 12.77 15.66 13.88V18.33H18.33V13.25Z" />
+                </svg>
+              </a>
+            ) : null}
+
+            <button
+              type="button"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
+              onClick={() => setMobileMenuOpen((current) => !current)}
+              className={`flex h-11 w-11 items-center justify-center rounded-full border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${buttonClassName}`}
+            >
+              <span className="relative h-4 w-5">
+                <span
+                  className={`absolute left-0 top-0 block h-px w-full bg-current transition ${
+                    mobileMenuOpen ? "translate-y-[7px] rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-[7px] block h-px w-full bg-current transition ${
+                    mobileMenuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 top-[14px] block h-px w-full bg-current transition ${
+                    mobileMenuOpen ? "-translate-y-[7px] -rotate-45" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
         </div>
       </Container>
 

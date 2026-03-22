@@ -22,7 +22,12 @@ export const siteConfig = {
     { label: "Music", href: "/film-music" },
     { label: "About", href: "/about" }
   ] satisfies NavItem[],
-  socialLinks: [] as SocialItem[],
+  socialLinks: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/liam-diethrich-801101316/"
+    }
+  ] satisfies SocialItem[],
   contactUrl: "/contact",
   contact: {
     email: {

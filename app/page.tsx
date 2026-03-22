@@ -122,15 +122,35 @@ export default function HomePage() {
                   </div>
 
                   <div className="border-t border-white/12 pt-4 md:pt-5">
-                    <Image
-                      src="/images/awards/the-american-prize-emblem.png"
-                      alt="The American Prize emblem"
-                      width={576}
-                      height={557}
-                      priority
-                      sizes="(max-width: 768px) 112px, 132px"
-                      className="h-auto w-28 drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] md:w-[8.25rem]"
-                    />
+                    <div className="flex items-end gap-3 sm:gap-4 md:gap-5">
+                      <Image
+                        src="/images/awards/the-american-prize-emblem-cropped.png"
+                        alt="The American Prize emblem"
+                        width={535}
+                        height={529}
+                        priority
+                        sizes="(max-width: 640px) 76px, (max-width: 768px) 88px, 108px"
+                        className="h-[4.75rem] w-auto drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] sm:h-[5.5rem] md:h-[6.75rem]"
+                      />
+                      <Image
+                        src="/images/awards/the-juilliard-orchestra-competition-emblem-cropped.png"
+                        alt="Juilliard Orchestra Competition emblem"
+                        width={535}
+                        height={529}
+                        priority
+                        sizes="(max-width: 640px) 76px, (max-width: 768px) 88px, 108px"
+                        className="h-[4.75rem] w-auto drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] sm:h-[5.5rem] md:h-[6.75rem]"
+                      />
+                      <Image
+                        src="/images/awards/chigiana-emblem-cropped.png"
+                        alt="Chigiana Film Scoring Festival emblem"
+                        width={874}
+                        height={837}
+                        priority
+                        sizes="(max-width: 640px) 76px, (max-width: 768px) 88px, 108px"
+                        className="h-[4.75rem] w-auto drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] sm:h-[5.5rem] md:h-[6.75rem]"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
