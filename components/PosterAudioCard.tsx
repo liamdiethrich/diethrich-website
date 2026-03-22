@@ -79,15 +79,15 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.04)_0%,rgba(12,12,14,0.18)_40%,rgba(12,12,14,0.62)_100%)]" />
-        <span className="absolute bottom-3 right-3 border border-white/12 bg-black/58 px-3 py-1.5 font-heading text-[0.64rem] uppercase tracking-[0.22em] text-ivory/76 backdrop-blur-sm md:bottom-4 md:right-4">
+        <span className="absolute bottom-3 right-3 border border-white/12 bg-black/58 px-3 py-1.5 font-heading text-[0.72rem] uppercase tracking-[0.22em] text-ivory/76 backdrop-blur-sm md:bottom-4 md:right-4">
           {formatDuration(duration)}
         </span>
       </div>
 
       <div className="space-y-4 p-4 md:p-5">
         <div className="space-y-2">
-          <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent/92">{track.mood}</p>
-          <h3 className="font-display text-[1.5rem] leading-[0.96] text-ivory md:text-[1.85rem]">{track.title}</h3>
+          <p className="font-heading text-[0.76rem] uppercase tracking-[0.24em] text-accent/92">{track.mood}</p>
+          <h3 className="font-display text-[1.68rem] leading-[0.96] text-ivory md:text-[2rem]">{track.title}</h3>
         </div>
 
         <div className="border-t border-white/8 pt-3.5">
@@ -114,7 +114,7 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
           type="button"
           onClick={togglePlay}
           aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
-          className="inline-flex min-h-11 items-center justify-center rounded-full border border-accent/60 px-5 font-heading text-[0.72rem] uppercase tracking-[0.22em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-accent/60 px-5 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {isPlaying ? "Pause" : "Play"}
         </button>

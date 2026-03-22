@@ -24,11 +24,11 @@ export default async function FilmDetailPage({ params }: FilmDetailPageProps) {
       <Container className="max-w-[1100px]">
         <div className="mb-8 space-y-3 text-center md:mb-10">
           {item.sourceTitle ? (
-            <p className="font-heading text-[0.72rem] uppercase tracking-[0.24em] text-neutral-500 md:text-xs md:tracking-[0.28em]">
+            <p className="font-heading text-[0.8rem] uppercase tracking-[0.24em] text-neutral-500 md:text-[0.88rem] md:tracking-[0.28em]">
               {item.sourceTitle}
             </p>
           ) : null}
-          <h1 className="font-heading text-[1.65rem] tracking-[0.12em] text-neutral-900 md:text-3xl md:tracking-[0.16em]">
+          <h1 className="font-heading text-[1.9rem] tracking-[0.12em] text-neutral-900 md:text-[3.35rem] md:tracking-[0.16em]">
             {item.title}
           </h1>
         </div>

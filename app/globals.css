@@ -47,6 +47,14 @@ body {
   color: var(--color-ink);
 }
 
+.font-heading {
+  font-weight: 600;
+}
+
+.font-display {
+  font-weight: 500;
+}
+
 .music-range,
 .music-range-dark {
   -webkit-appearance: none;

@@ -13,35 +13,6 @@ const selectedWorks = [
 
 const [leadWork, ...supportingWorks] = selectedWorks;
 
-const disciplines = [
-  {
-    number: "01",
-    title: "Film",
-    description:
-      "Narrative-first scoring with a strong sense of pacing, character, and emotional architecture."
-  },
-  {
-    number: "02",
-    title: "Games",
-    description:
-      "Adaptive music systems and layered writing that respond to play without losing musical identity."
-  },
-  {
-    number: "03",
-    title: "Concert",
-    description:
-      "Contemporary concert music grounded in instrumental character, dramatic tension, and formal clarity."
-  }
-] as const;
-
-const heroRecognitionLine = "Winner of the American Prize • Collaborations with Grammy-winning ensembles";
-
-const aboutCredentials = [
-  "Juilliard • USC Screen Scoring",
-  "American Prize recognition",
-  "Collaborations with Grammy-winning ensembles"
-] as const;
-
 type WorkPreviewProps = {
   item: FilmMusicItem;
   lead?: boolean;
@@ -70,21 +41,20 @@ function WorkPreview({ item, lead = false }: WorkPreviewProps) {
           ) : null}
         </div>
 
-        <div className="grid gap-3 border-b border-black/10 px-1 py-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-start md:gap-5">
-          <div className="space-y-2">
-            {item.sourceTitle ? (
-              <p className="font-heading text-[0.72rem] uppercase tracking-[0.22em] text-accent">{item.sourceTitle}</p>
-            ) : null}
-            <h3 className={`font-display leading-[0.96] text-ink ${lead ? "text-[2rem] md:text-[2.45rem]" : "text-[1.8rem] md:text-[2.2rem]"}`}>
-              {item.title}
-            </h3>
-            {item.homeCaption ? (
-              <p className="max-w-[38rem] text-[0.98rem] leading-[1.68] text-ink/70 md:text-[1rem]">{item.homeCaption}</p>
-            ) : null}
-          </div>
-          <p className="font-heading text-[0.74rem] uppercase tracking-[0.22em] text-ink/42 transition group-hover:text-accent">
-            Open Work
-          </p>
+        <div className="space-y-2 border-b border-black/10 px-1 py-5">
+          {item.sourceTitle ? (
+            <p className="font-heading text-[0.8rem] uppercase tracking-[0.22em] text-accent">{item.sourceTitle}</p>
+          ) : null}
+          <h3
+            className={`font-display leading-[0.96] text-ink transition-colors group-hover:text-accent ${
+              lead ? "text-[2.2rem] md:text-[2.7rem]" : "text-[1.95rem] md:text-[2.4rem]"
+            }`}
+          >
+            {item.title}
+          </h3>
+          {item.homeCaption ? (
+            <p className="max-w-[38rem] text-[0.98rem] leading-[1.68] text-ink/70 md:text-[1rem]">{item.homeCaption}</p>
+          ) : null}
         </div>
       </Link>
     </article>
@@ -94,7 +64,7 @@ function WorkPreview({ item, lead = false }: WorkPreviewProps) {
 export default function HomePage() {
   return (
     <div className="bg-canvas text-ink">
-      <section className="relative -mt-[76px] min-h-[108svh] overflow-hidden bg-ink md:-mt-[92px] md:min-h-[100svh]">
+      <section className="relative -mt-[76px] min-h-[100svh] overflow-hidden bg-ink md:-mt-[92px]">
         <Image
           src="/images/home/liam-conducting-enhanced.jpg"
           alt="Liam Diethrich conducting an orchestra in the studio"
@@ -116,226 +86,87 @@ export default function HomePage() {
           />
         </div>
 
-        <Container className="relative z-10 flex min-h-[108svh] max-w-none items-end px-4 pb-10 pt-32 sm:px-5 md:min-h-[100svh] md:px-[44px] md:pb-[4.5rem] md:pt-32 xl:px-[60px]">
+        <Container className="relative z-10 flex min-h-[100svh] max-w-none items-end px-4 pb-8 pt-28 sm:px-5 md:px-[44px] md:pb-[4.5rem] md:pt-32 xl:px-[60px]">
           <div className="grid w-full gap-10 md:grid-cols-12 md:items-end">
             <div className="md:col-span-6 md:col-start-7">
-              <div className="max-w-[19.5rem] space-y-5 text-ivory sm:max-w-[24rem] md:ml-auto md:max-w-[32rem] md:space-y-6">
-                <p className="font-heading text-[0.78rem] uppercase tracking-[0.26em] text-accent md:text-[0.82rem]">
-                  COMPOSER • VIOLINIST
-                </p>
-
+              <div className="max-w-[19.5rem] space-y-4 text-ivory sm:max-w-[24rem] md:ml-auto md:max-w-[32rem] md:space-y-5">
                 <div className="space-y-4">
                   <h1 className="font-heading text-[clamp(2.7rem,13vw,4.7rem)] uppercase leading-[0.9] tracking-[0.14em] md:text-[clamp(4.8rem,6vw,6.8rem)] md:tracking-[0.16em]">
                     Liam Diethrich
                   </h1>
-                  <p className="max-w-[26rem] font-display text-[1.45rem] leading-[1.02] text-ivory md:text-[2.35rem]">
-                    Music for screen, games, and the concert stage.
+                  <p className="max-w-[26rem] font-display text-[1.62rem] leading-[1.02] text-ivory md:text-[2.6rem]">
+                    Media and Concert Composer
                   </p>
                 </div>
 
-                <p className="max-w-[29rem] text-[0.98rem] leading-[1.72] text-ivory/82 md:text-[1.08rem] md:leading-[1.78]">
-                  Liam Diethrich writes award-winning music recognized for its distinctive voice, dramatic clarity,
-                  and inventive musical language. A composer and violinist with training from Juilliard and USC
-                  Screen Scoring, he creates work for film, games, and live performance with equal attention to
-                  story, structure, and emotional detail.
+                <p className="max-w-[29rem] text-[1.04rem] leading-[1.72] text-ivory/82 md:text-[1.14rem] md:leading-[1.78]">
+                  Composer and violinist Liam Diethrich (Juilliard, USC Screen Scoring) writes award-winning music for
+                  screen, games, and the concert stage. His work is recognized for its distinctive voice, innovative
+                  musical language, and collaborations with Grammy-winning ensembles.
                 </p>
 
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href={siteConfig.ctaUrl}
-                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-accent/80 bg-accent px-6 text-center font-heading text-[0.8rem] uppercase tracking-[0.22em] text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.34),0_16px_30px_rgba(0,0,0,0.16)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:min-h-[52px] md:px-7"
-                  >
-                    Explore Music
-                  </Link>
-                  <Link
-                    href="/about"
-                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/[0.02] px-6 text-center font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ivory shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-white/32 hover:bg-white/6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:min-h-[52px] md:px-7"
-                  >
-                    About Liam
-                  </Link>
+                <div className="space-y-4 pt-1 md:space-y-5">
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Link
+                      href={siteConfig.ctaUrl}
+                      className="inline-flex min-h-12 items-center justify-center rounded-full border border-accent/80 bg-accent px-6 text-center font-heading text-[0.88rem] uppercase tracking-[0.22em] text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.34),0_16px_30px_rgba(0,0,0,0.16)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:min-h-[52px] md:px-7"
+                    >
+                      Explore Music
+                    </Link>
+                    <Link
+                      href="/about"
+                      className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/[0.02] px-6 text-center font-heading text-[0.88rem] uppercase tracking-[0.22em] text-ivory shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-white/32 hover:bg-white/6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:min-h-[52px] md:px-7"
+                    >
+                      About
+                    </Link>
+                  </div>
+
+                  <div className="border-t border-white/12 pt-4 md:pt-5">
+                    <Image
+                      src="/images/awards/the-american-prize-emblem.png"
+                      alt="The American Prize emblem"
+                      width={576}
+                      height={557}
+                      priority
+                      sizes="(max-width: 768px) 112px, 132px"
+                      className="h-auto w-28 drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] md:w-[8.25rem]"
+                    />
+                  </div>
                 </div>
-
-                <p className="border-t border-white/12 pt-5 font-heading text-[0.72rem] uppercase leading-relaxed tracking-[0.16em] text-ivory/64 md:pt-6 md:text-[0.78rem]">
-                  {heroRecognitionLine}
-                </p>
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <div className="bg-paper">
-        <section className="border-t border-black/8 bg-[linear-gradient(180deg,#ece5da_0%,#e7dfd4_100%)] py-[4.5rem] md:py-24 lg:py-28">
-          <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
-            <div className="grid gap-10 border-b border-black/10 pb-10 md:grid-cols-[minmax(0,0.92fr)_minmax(0,0.6fr)] md:items-end md:pb-12">
-              <div className="max-w-[40rem] space-y-4">
-                <p className="font-heading text-[0.76rem] uppercase tracking-[0.26em] text-accent md:text-[0.82rem]">
-                  SELECTED WORK
-                </p>
-                <h2 className="max-w-[34rem] font-display text-[2.2rem] leading-[0.96] text-ink md:text-[3.2rem]">
-                  Scores shaped by story, atmosphere, and emotional precision.
-                </h2>
-                <p className="max-w-[34rem] text-[1rem] leading-[1.7] text-ink/72 md:text-[1.08rem]">
-                  From intimate psychological tension to larger orchestral sweep, Liam&apos;s work is built to serve
-                  narrative while remaining musically vivid in its own right.
-                </p>
+      <section className="border-t border-black/8 bg-[linear-gradient(180deg,#ece5da_0%,#e7dfd4_100%)] py-[4.5rem] md:py-24 lg:py-28">
+        <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
+          <div className="grid gap-5 lg:grid-cols-12">
+            {leadWork ? (
+              <div className="lg:col-span-7">
+                <WorkPreview item={leadWork} lead />
               </div>
+            ) : null}
 
-              <div className="md:justify-self-end">
-                <Link
-                  href={siteConfig.ctaUrl}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-black/10 bg-white/55 px-6 font-heading text-[0.78rem] uppercase tracking-[0.22em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  View Full Portfolio
-                </Link>
+            {supportingWorks.length > 0 ? (
+              <div className="space-y-5 lg:col-span-5">
+                {supportingWorks.map((item) => (
+                  <WorkPreview key={item.slug} item={item} />
+                ))}
               </div>
-            </div>
-
-            <div className="mt-10 grid gap-5 lg:grid-cols-12">
-              {leadWork ? (
-                <div className="lg:col-span-7">
-                  <WorkPreview item={leadWork} lead />
-                </div>
-              ) : null}
-
-              {supportingWorks.length > 0 ? (
-                <div className="space-y-5 lg:col-span-5">
-                  {supportingWorks.map((item) => (
-                    <WorkPreview key={item.slug} item={item} />
-                  ))}
-                </div>
               ) : null}
             </div>
-          </Container>
-        </section>
 
-        <section className="border-t border-black/8 bg-paper py-[4.5rem] md:py-[5.5rem] lg:py-24">
-          <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
-            <div className="max-w-[38rem] space-y-4">
-              <p className="font-heading text-[0.76rem] uppercase tracking-[0.26em] text-accent md:text-[0.82rem]">
-                PRACTICE
-              </p>
-              <h2 className="font-display text-[2.1rem] leading-[0.96] text-ink md:text-[3rem]">
-                Three musical worlds, one distinctive voice.
-              </h2>
-            </div>
-
-            <div className="mt-10 grid gap-5 lg:grid-cols-3">
-              {disciplines.map((item) => (
-                <article
-                  key={item.title}
-                  className="flex h-full flex-col justify-between border border-black/10 bg-ivory/55 px-5 py-6 shadow-[0_14px_30px_rgba(23,18,16,0.04)] md:px-7 md:py-8"
-                >
-                  <div className="space-y-5">
-                    <div className="flex items-center justify-between border-b border-black/10 pb-4">
-                      <p className="font-heading text-[0.76rem] uppercase tracking-[0.22em] text-accent">{item.number}</p>
-                      <div className="h-px w-12 bg-accent/45" />
-                    </div>
-                    <div className="space-y-3">
-                      <h3 className="font-display text-[2rem] leading-none text-ink md:text-[2.35rem]">{item.title}</h3>
-                      <p className="text-[1rem] leading-[1.72] text-ink/72 md:text-[1.04rem]">{item.description}</p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </Container>
-        </section>
-
-        <section className="border-t border-black/8 bg-[linear-gradient(180deg,#e8dfd3_0%,#ded6ca_100%)] py-[4.5rem] md:py-[5.5rem] lg:py-24">
-          <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,0.7fr)] lg:gap-x-16 xl:gap-x-20">
-              <div className="space-y-6">
-                <div className="max-w-[40rem] space-y-4">
-                  <p className="font-heading text-[0.76rem] uppercase tracking-[0.26em] text-accent md:text-[0.82rem]">
-                    ABOUT
-                  </p>
-                  <h2 className="font-display text-[2.25rem] leading-[0.96] text-ink md:text-[3.25rem]">
-                    A composer grounded in story and structure.
-                  </h2>
-                </div>
-
-                <p className="max-w-[41rem] text-[1rem] leading-[1.76] text-ink/76 md:text-[1.08rem]">
-                  Liam approaches every project with both a performer&apos;s sensitivity and a composer&apos;s architectural
-                  ear. The result is music that feels immediate, intentional, and fully alive inside the world it
-                  serves - whether on screen, in interactive media, or in the concert hall.
-                </p>
-
-                <div className="grid gap-3 border-t border-black/10 pt-5">
-                  {aboutCredentials.map((item) => (
-                    <p key={item} className="font-heading text-[0.76rem] uppercase tracking-[0.19em] text-ink/58">
-                      {item}
-                    </p>
-                  ))}
-                </div>
-
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/about"
-                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink bg-ink px-6 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ivory shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:bg-charcoal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  >
-                    Learn More
-                  </Link>
-                  <Link
-                    href={siteConfig.resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-12 items-center justify-center rounded-full border border-black/10 bg-white/45 px-6 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  >
-                    Resume
-                  </Link>
-                </div>
-              </div>
-
-              <div className="lg:justify-self-end">
-                <div className="relative overflow-hidden border border-black/10 bg-black shadow-[0_24px_52px_rgba(23,18,16,0.08)]">
-                  <Image
-                    src="/images/about/liam-conducting-portrait-enhanced.jpg"
-                    alt="Portrait of Liam Diethrich conducting"
-                    width={900}
-                    height={1200}
-                    sizes="(max-width: 1024px) 100vw, 38vw"
-                    className="aspect-[4/5] h-auto w-full object-cover object-center"
-                  />
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section>
-
-        <section className="border-t border-black/8 bg-footer py-[4.5rem] text-ivory md:py-[5.5rem]">
-          <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,0.55fr)] lg:items-end lg:gap-x-16">
-              <div className="space-y-5">
-                <p className="font-heading text-[0.76rem] uppercase tracking-[0.26em] text-accent md:text-[0.82rem]">
-                  CONTACT
-                </p>
-                <h2 className="max-w-[38rem] font-display text-[2.25rem] leading-[0.96] text-ivory md:text-[3.3rem]">
-                  Bring the score into focus.
-                </h2>
-                <p className="max-w-[34rem] text-[1rem] leading-[1.74] text-ivory/72 md:text-[1.08rem]">
-                  Available for film, games, concert commissions, and select collaborative projects.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-start">
-                <Link
-                  href={siteConfig.contactUrl}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-accent/80 bg-accent px-6 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.34),0_14px_28px_rgba(0,0,0,0.14)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  Start a Conversation
-                </Link>
-                <Link
-                  href={siteConfig.ctaUrl}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/[0.02] px-6 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ivory shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition hover:border-white/32 hover:bg-white/6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                >
-                  Listen to More Work
-                </Link>
-              </div>
-            </div>
-          </Container>
-        </section>
-      </div>
+          <div className="mt-12 flex justify-center md:mt-16">
+            <Link
+              href={siteConfig.ctaUrl}
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-black/10 bg-white/55 px-6 font-heading text-[0.86rem] uppercase tracking-[0.22em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              View Portfolio
+            </Link>
+          </div>
+        </Container>
+      </section>
     </div>
   );
 }

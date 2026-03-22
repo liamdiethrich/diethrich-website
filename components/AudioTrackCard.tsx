@@ -80,14 +80,14 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,#3a3a40_0%,#1a1b1f_48%,#101114_100%)] px-6 text-center">
-              <p className="font-heading text-sm uppercase tracking-[0.18em] text-neutral-200 md:text-base">
+              <p className="font-heading text-[1rem] uppercase tracking-[0.18em] text-neutral-200 md:text-[1.08rem]">
                 {track.title}
               </p>
             </div>
           )}
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.04)_0%,rgba(10,10,12,0.42)_100%)]" />
           {trackNumber ? (
-            <span className="absolute left-3 top-3 border border-white/10 bg-black/48 px-2.5 py-1 font-heading text-[0.62rem] uppercase tracking-[0.24em] text-ivory/78 backdrop-blur-sm">
+            <span className="absolute left-3 top-3 border border-white/10 bg-black/48 px-2.5 py-1 font-heading text-[0.7rem] uppercase tracking-[0.24em] text-ivory/78 backdrop-blur-sm">
               {trackNumber}
             </span>
           ) : null}
@@ -96,7 +96,7 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
         <div className="min-w-0 p-4 md:p-5">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 space-y-1.5">
-              <h3 className="font-display text-[1.48rem] leading-[0.96] text-ivory md:text-[1.8rem]">
+              <h3 className="font-display text-[1.62rem] leading-[0.96] text-ivory md:text-[1.98rem]">
                 {track.title}
               </h3>
             </div>

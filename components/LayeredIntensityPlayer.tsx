@@ -613,12 +613,12 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
         <div className="space-y-5">
           <div className="flex flex-col gap-4 border-b border-white/8 pb-5 md:flex-row md:items-end md:justify-between">
             <div className="min-w-0 space-y-2.5">
-              <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent">{track.mood}</p>
-              <h3 className="font-display text-[1.95rem] leading-[0.96] text-ivory md:text-[2.5rem]">{track.title}</h3>
+              <p className="font-heading text-[0.76rem] uppercase tracking-[0.24em] text-accent">{track.mood}</p>
+              <h3 className="font-display text-[2.15rem] leading-[0.96] text-ivory md:text-[2.8rem]">{track.title}</h3>
             </div>
 
             <div className="self-start md:self-end">
-              <span className="border border-white/12 bg-white/[0.03] px-3 py-1.5 font-heading text-[0.66rem] uppercase tracking-[0.2em] text-ivory/64">
+              <span className="border border-white/12 bg-white/[0.03] px-3 py-1.5 font-heading text-[0.74rem] uppercase tracking-[0.2em] text-ivory/64">
                 {playbackStateLabel}
               </span>
             </div>
@@ -662,10 +662,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
 
             {!showVideoVisualizer ? (
               <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(180deg,rgba(15,16,18,0.5)_0%,rgba(11,12,14,0.78)_100%)] px-6 text-center">
-                <div className="space-y-3">
-                  <p className="font-heading text-[0.78rem] uppercase tracking-[0.24em] text-ivory/72 md:text-[0.86rem]">
-                    Visual Intensity Layers
-                  </p>
+                <div>
                   <p className="mx-auto max-w-[24rem] text-[0.96rem] leading-[1.7] text-ivory/62 md:text-[1.02rem]">
                     {videoPlaceholderLabel}
                   </p>
@@ -682,8 +679,8 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
           <div className="border border-white/10 bg-black/16 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-2">
-                <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent">Transport</p>
-                <p className="font-display text-[1.35rem] leading-[0.96] text-ivory">{playbackStateLabel}</p>
+                <p className="font-heading text-[0.76rem] uppercase tracking-[0.24em] text-accent">Transport</p>
+                <p className="font-display text-[1.52rem] leading-[0.96] text-ivory">{playbackStateLabel}</p>
               </div>
               <button
                 type="button"
@@ -707,7 +704,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
                 type="button"
                 onClick={play}
                 aria-label="Play layered intensity demo"
-                className="rounded-full border border-accent/60 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="rounded-full border border-accent/60 px-4 py-2 font-heading text-[0.76rem] uppercase tracking-[0.18em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Play
               </button>
@@ -715,7 +712,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
                 type="button"
                 onClick={pause}
                 aria-label="Pause layered intensity demo"
-                className="rounded-full border border-white/14 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-ivory/72 transition hover:border-white/26 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="rounded-full border border-white/14 px-4 py-2 font-heading text-[0.76rem] uppercase tracking-[0.18em] text-ivory/72 transition hover:border-white/26 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Pause
               </button>
@@ -723,7 +720,7 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
                 type="button"
                 onClick={stop}
                 aria-label="Restart layered intensity demo"
-                className="rounded-full border border-white/14 px-4 py-2 text-[11px] uppercase tracking-[0.18em] text-ivory/72 transition hover:border-white/26 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="rounded-full border border-white/14 px-4 py-2 font-heading text-[0.76rem] uppercase tracking-[0.18em] text-ivory/72 transition hover:border-white/26 hover:bg-white/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               >
                 Restart
               </button>
@@ -733,10 +730,10 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
           <div className="border border-white/10 bg-black/16 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-2">
-                <p className="font-heading text-[0.68rem] uppercase tracking-[0.24em] text-accent">Intensity</p>
-                <p className="font-display text-[1.35rem] leading-[0.96] text-ivory">{intensityLabel}</p>
+                <p className="font-heading text-[0.76rem] uppercase tracking-[0.24em] text-accent">Intensity</p>
+                <p className="font-display text-[1.52rem] leading-[0.96] text-ivory">{intensityLabel}</p>
               </div>
-              <p className="font-heading text-[0.66rem] uppercase tracking-[0.2em] text-ivory/46">0 - 2</p>
+              <p className="font-heading text-[0.74rem] uppercase tracking-[0.2em] text-ivory/46">0 - 2</p>
             </div>
 
             <div className="mt-4 space-y-3">
@@ -754,12 +751,11 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
                 onChange={onSliderChange}
                 className="music-range-dark w-full"
               />
-              <div className="grid grid-cols-3 gap-2 font-heading text-[0.62rem] uppercase tracking-[0.22em] text-ivory/46">
+              <div className="grid grid-cols-3 gap-2 font-heading text-[0.7rem] uppercase tracking-[0.22em] text-ivory/46">
                 <span>Very Intense</span>
                 <span className="text-center">Intense</span>
                 <span className="text-right">Ambient</span>
               </div>
-              <p className="text-[0.94rem] leading-[1.65] text-ivory/58">Move through the musical intensity layers.</p>
             </div>
           </div>
 

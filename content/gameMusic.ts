@@ -24,14 +24,6 @@ export type LayeredTrack = {
 
 export type GameTrack = NormalTrack | LayeredTrack;
 
-export type GameProject = {
-  slug: string;
-  title: string;
-  description: string;
-  image?: string;
-  tracks: GameTrack[];
-};
-
 // Keep the audio layer mapping explicit. The shared "Combat" prefix appears in all three filenames,
 // so keyword-based inference can misclassify the ambient layer as very intense.
 export const intensityDemoAudioLayers: IntensityLayerMap<string> = {
@@ -77,13 +69,3 @@ export const smokeBreakMenuTrack: NormalTrack = {
   audioUrl: "/audio/game-music/smoke-break-menu-music.m4a",
   image: "/images/game-music/smoke-break-menu-music.jpg"
 };
-
-export const gameProjects: GameProject[] = [
-  {
-    slug: "featured-game-music",
-    title: "FEATURED GAME MUSIC",
-    description: "Layered adaptive combat scoring paired with a standalone menu cue.",
-    image: "/images/game-music/smoke-break-menu-music.jpg",
-    tracks: [layeredIntensityDemoTrack, smokeBreakMenuTrack]
-  }
-];

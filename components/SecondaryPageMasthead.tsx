@@ -4,7 +4,7 @@ import { Container } from "./Container";
 type SecondaryPageMastheadProps = {
   eyebrow: string;
   title: string;
-  body: string;
+  body?: string;
   supportingLine?: string;
   aside?: ReactNode;
   className?: string;
@@ -26,15 +26,17 @@ export function SecondaryPageMasthead({
         <div className="border-t border-black/10 pt-6 md:pt-8">
           <div className="grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,21rem)] lg:items-end lg:gap-x-16 xl:gap-x-20">
             <div className="max-w-[46rem] space-y-5 md:space-y-6">
-              <p className="font-heading text-[0.76rem] uppercase tracking-[0.26em] text-accent md:text-[0.82rem]">
+              <p className="font-heading text-[0.84rem] uppercase tracking-[0.26em] text-accent md:text-[0.9rem]">
                 {eyebrow}
               </p>
-              <h1 className="max-w-[42rem] font-display text-[2.65rem] leading-[0.92] text-ink md:text-[3.65rem] lg:text-[4.35rem]">
+              <h1 className="max-w-[42rem] font-display text-[2.95rem] leading-[0.92] text-ink md:text-[4rem] lg:text-[4.75rem]">
                 {title}
               </h1>
-              <p className="max-w-[39rem] text-[1rem] leading-[1.76] text-ink/72 md:text-[1.08rem]">{body}</p>
+              {body ? (
+                <p className="max-w-[39rem] text-[1.06rem] leading-[1.76] text-ink/72 md:text-[1.14rem]">{body}</p>
+              ) : null}
               {supportingLine ? (
-                <p className="max-w-[31rem] border-t border-black/10 pt-5 font-heading text-[0.72rem] uppercase tracking-[0.22em] text-ink/52">
+                <p className="max-w-[31rem] border-t border-black/10 pt-5 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ink/52">
                   {supportingLine}
                 </p>
               ) : null}

@@ -50,7 +50,7 @@ export function FilmGridItem({ item, variant = "standard" }: FilmGridItemProps) 
         <div className={`grid gap-4 ${isFeature ? "md:grid-cols-[minmax(0,1fr)_minmax(12rem,18rem)] md:gap-7" : ""}`}>
           <div className="space-y-2.5">
             {item.sourceTitle ? (
-              <p className="font-heading text-[0.72rem] uppercase tracking-[0.22em] text-accent">{item.sourceTitle}</p>
+              <p className="font-heading text-[0.8rem] uppercase tracking-[0.22em] text-accent">{item.sourceTitle}</p>
             ) : null}
             <Link
               href={`/film-music/${item.slug}`}
@@ -58,7 +58,7 @@ export function FilmGridItem({ item, variant = "standard" }: FilmGridItemProps) 
             >
               <h2
                 className={`font-display leading-[0.96] text-ink transition-colors group-hover:text-accent ${
-                  isFeature ? "text-[2.2rem] md:text-[3rem]" : "text-[1.8rem] md:text-[2.2rem]"
+                  isFeature ? "text-[2.4rem] md:text-[3.25rem]" : "text-[1.95rem] md:text-[2.4rem]"
                 }`}
               >
                 {item.title}
@@ -76,28 +76,9 @@ export function FilmGridItem({ item, variant = "standard" }: FilmGridItemProps) 
               ) : (
                 <div />
               )}
-              <Link
-                href={`/film-music/${item.slug}`}
-                className="inline-flex items-center gap-3 font-heading text-[0.74rem] uppercase tracking-[0.22em] text-ink/46 transition hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              >
-                <span className="h-px w-8 bg-current/45 transition-all group-hover:w-10 group-hover:bg-accent" />
-                Open Work
-              </Link>
             </div>
           ) : null}
         </div>
-
-        {!isFeature ? (
-          <div className="mt-4">
-            <Link
-              href={`/film-music/${item.slug}`}
-              className="inline-flex items-center gap-3 font-heading text-[0.74rem] uppercase tracking-[0.22em] text-ink/42 transition hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            >
-              <span className="h-px w-8 bg-current/45 transition-all group-hover:w-10 group-hover:bg-accent" />
-              Open Work
-            </Link>
-          </div>
-        ) : null}
       </div>
     </article>
   );

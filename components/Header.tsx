@@ -76,7 +76,7 @@ export function Header() {
         <div className="flex min-h-[76px] items-center gap-4 md:min-h-[92px] md:gap-10">
           <Link
             href="/"
-            className={`inline-flex items-center font-heading text-[1.02rem] uppercase leading-none tracking-[0.32em] transition-opacity hover:opacity-75 sm:text-[1.04rem] md:text-[1.28rem] ${
+            className={`inline-flex items-center font-heading text-[1.08rem] uppercase leading-none tracking-[0.32em] transition-opacity hover:opacity-75 sm:text-[1.12rem] md:text-[1.42rem] ${
               transparentHomeHeader ? "text-ivory" : "text-ink"
             }`}
           >
@@ -92,7 +92,7 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`relative font-heading text-[0.82rem] uppercase tracking-[0.24em] transition ${
+                  className={`relative font-heading text-[0.9rem] uppercase tracking-[0.24em] transition ${
                     active ? "text-accent" : linkClassName
                   } after:absolute after:-bottom-2 after:left-0 after:h-px after:transition-all ${
                     active ? "after:w-full after:bg-accent" : "after:w-0 hover:after:w-full hover:after:bg-current"
@@ -106,7 +106,7 @@ export function Header() {
 
           <Link
             href={siteConfig.contactUrl}
-            className={`hidden min-h-11 items-center justify-center rounded-full border bg-white/[0.02] px-5 font-heading text-[0.76rem] uppercase tracking-[0.22em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:inline-flex ${buttonClassName}`}
+            className={`hidden min-h-11 items-center justify-center rounded-full border bg-white/[0.02] px-5 font-heading text-[0.84rem] uppercase tracking-[0.22em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:inline-flex ${buttonClassName}`}
           >
             Contact
           </Link>
@@ -153,7 +153,7 @@ export function Header() {
                       href={item.href}
                       onClick={(event) => handleMobileNavClick(event, item.href)}
                       aria-current={active ? "page" : undefined}
-                      className={`border-b border-black/10 py-5 font-heading text-[1rem] uppercase tracking-[0.22em] transition ${
+                      className={`border-b border-black/10 py-5 font-heading text-[1.08rem] uppercase tracking-[0.22em] transition ${
                         active ? "text-accent" : "text-ink/82"
                       }`}
                     >
@@ -163,17 +163,14 @@ export function Header() {
                 })}
               </nav>
 
-              <div className="space-y-5 pb-4">
+              <div className="pb-4">
                 <Link
                   href={siteConfig.contactUrl}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/12 bg-white/50 px-6 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/12 bg-white/50 px-6 font-heading text-[0.88rem] uppercase tracking-[0.22em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   Contact
                 </Link>
-                <p className="max-w-[20rem] text-[0.96rem] leading-relaxed text-ink/72">
-                  Award-winning music for film, games, and the concert stage.
-                </p>
               </div>
             </div>
           </Container>
