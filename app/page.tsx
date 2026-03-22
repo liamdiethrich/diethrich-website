@@ -124,7 +124,7 @@ export default function HomePage() {
                   <div className="border-t border-white/12 pt-4 md:pt-5">
                     <div className="flex items-end gap-3 sm:gap-4 md:gap-5">
                       <Image
-                        src="/images/awards/the-american-prize-emblem-cropped.png"
+                        src="/images/awards/the-american-prize-emblem-cropped-enhanced.png"
                         alt="The American Prize emblem"
                         width={535}
                         height={529}
