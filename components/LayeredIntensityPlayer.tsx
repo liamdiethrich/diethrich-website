@@ -9,12 +9,12 @@ type LayeredIntensityPlayerProps = {
 };
 
 type LayerBuffers = IntensityLayerMap<AudioBuffer>;
-type LayerSources = IntensityLayerMap<AudioBufferSourceNode>;
 type LayerGains = IntensityLayerMap<GainNode>;
 type VideoLoadStatus = "idle" | "loading" | "ready" | "error";
 
 const INTENSITY_LAYER_KEYS: IntensityLayerKey[] = ["ambient", "intense", "veryIntense"];
 const DRIFT_CHECK_INTERVAL_MS = 500;
+const SOURCE_SCHEDULER_INTERVAL_MS = 250;
 const DRIFT_TOLERANCE_SECONDS = 0.08;
 const GAIN_SMOOTHING_SECONDS = 0.02;
 const MIN_RESUME_OFFSET = 0.01;
@@ -105,7 +105,10 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
   const contextRef = useRef<AudioContext | null>(null);
   const gainsRef = useRef<LayerGains | null>(null);
   const buffersRef = useRef<LayerBuffers | null>(null);
-  const sourcesRef = useRef<LayerSources | null>(null);
+  const sourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
+  const sourceSchedulerIntervalRef = useRef<number | null>(null);
+  const nextSourceStartTimeRef = useRef(0);
+  const nextSourceOffsetRef = useRef(0);
   const videoRefs = useRef<Partial<Record<IntensityLayerKey, HTMLVideoElement | null>>>({});
   const startTimeRef = useRef(0);
   const pausedOffsetRef = useRef(0);
@@ -172,7 +175,12 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
     }
 
     if (isPlayingRef.current) {
-      return normalizeLoopOffset(ctx.currentTime - startTimeRef.current, duration);
+      const elapsed = ctx.currentTime - startTimeRef.current;
+      if (elapsed <= 0) {
+        return 0;
+      }
+
+      return normalizeLoopOffset(elapsed, duration);
     }
 
     return normalizeLoopOffset(pausedOffsetRef.current, duration);
@@ -289,13 +297,12 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
   );
 
   const stopSources = useCallback(() => {
-    const existing = sourcesRef.current;
-    if (!existing) {
-      return;
+    if (sourceSchedulerIntervalRef.current !== null) {
+      window.clearInterval(sourceSchedulerIntervalRef.current);
+      sourceSchedulerIntervalRef.current = null;
     }
 
-    INTENSITY_LAYER_KEYS.forEach((key) => {
-      const source = existing[key];
+    sourcesRef.current.forEach((source) => {
       source.onended = null;
       try {
         source.stop();
@@ -305,7 +312,9 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
       source.disconnect();
     });
 
-    sourcesRef.current = null;
+    sourcesRef.current.clear();
+    nextSourceStartTimeRef.current = 0;
+    nextSourceOffsetRef.current = 0;
   }, []);
 
   const setCrossfade = useCallback((value: number) => {
@@ -412,6 +421,44 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
     track.layers
   ]);
 
+  const scheduleSourcesAhead = useCallback(() => {
+    const buffers = buffersRef.current;
+    const gains = gainsRef.current;
+    const ctx = contextRef.current;
+    const duration = durationRef.current;
+
+    if (!buffers || !gains || !ctx || duration <= MIN_RESUME_OFFSET) {
+      return;
+    }
+
+    const scheduleAheadSeconds = Math.max(duration, 12);
+    const scheduleUntilTime = ctx.currentTime + scheduleAheadSeconds;
+
+    while (nextSourceStartTimeRef.current < scheduleUntilTime) {
+      const normalizedOffset = normalizeLoopOffset(nextSourceOffsetRef.current, duration);
+      const remaining = duration - normalizedOffset;
+      const snapToLoopStart = remaining <= MIN_RESUME_OFFSET;
+      const segmentOffset = snapToLoopStart ? 0 : normalizedOffset;
+      const segmentDuration = snapToLoopStart ? duration : remaining;
+
+      INTENSITY_LAYER_KEYS.forEach((key) => {
+        const source = ctx.createBufferSource();
+        source.buffer = buffers[key];
+        source.connect(gains[key]);
+        source.onended = () => {
+          source.disconnect();
+          sourcesRef.current.delete(source);
+        };
+
+        source.start(nextSourceStartTimeRef.current, layerStartOffsets[key] + segmentOffset, segmentDuration);
+        sourcesRef.current.add(source);
+      });
+
+      nextSourceStartTimeRef.current += segmentDuration;
+      nextSourceOffsetRef.current = 0;
+    }
+  }, [layerStartOffsets]);
+
   const startSources = useCallback(
     (offset: number) => {
       const buffers = buffersRef.current;
@@ -423,50 +470,30 @@ export function LayeredIntensityPlayer({ track }: LayeredIntensityPlayerProps) {
         return false;
       }
 
-      const sharedOffset = normalizeLoopOffset(offset, duration);
-      const ambientSource = ctx.createBufferSource();
-      const intenseSource = ctx.createBufferSource();
-      const veryIntenseSource = ctx.createBufferSource();
+      stopSources();
 
-      ambientSource.buffer = buffers.ambient;
-      intenseSource.buffer = buffers.intense;
-      veryIntenseSource.buffer = buffers.veryIntense;
+      const normalizedOffset = normalizeLoopOffset(offset, duration);
+      const remaining = duration - normalizedOffset;
+      const sharedOffset = remaining <= MIN_RESUME_OFFSET ? 0 : normalizedOffset;
+      const firstStartTime = ctx.currentTime + 0.01;
 
-      ambientSource.connect(gains.ambient);
-      intenseSource.connect(gains.intense);
-      veryIntenseSource.connect(gains.veryIntense);
+      nextSourceStartTimeRef.current = firstStartTime;
+      nextSourceOffsetRef.current = sharedOffset;
+      startTimeRef.current = firstStartTime - sharedOffset;
+      scheduleSourcesAhead();
 
-      ambientSource.loop = true;
-      intenseSource.loop = true;
-      veryIntenseSource.loop = true;
+      sourceSchedulerIntervalRef.current = window.setInterval(() => {
+        scheduleSourcesAhead();
+      }, SOURCE_SCHEDULER_INTERVAL_MS);
 
-      ambientSource.loopStart = layerStartOffsets.ambient;
-      ambientSource.loopEnd = layerStartOffsets.ambient + duration;
-      intenseSource.loopStart = layerStartOffsets.intense;
-      intenseSource.loopEnd = layerStartOffsets.intense + duration;
-      veryIntenseSource.loopStart = layerStartOffsets.veryIntense;
-      veryIntenseSource.loopEnd = layerStartOffsets.veryIntense + duration;
-
-      ambientSource.start(0, layerStartOffsets.ambient + sharedOffset);
-      intenseSource.start(0, layerStartOffsets.intense + sharedOffset);
-      veryIntenseSource.start(0, layerStartOffsets.veryIntense + sharedOffset);
-
-      sourcesRef.current = {
-        ambient: ambientSource,
-        intense: intenseSource,
-        veryIntense: veryIntenseSource
-      };
-
-      startTimeRef.current = ctx.currentTime - sharedOffset;
       setCrossfade(sliderValue);
       return true;
     },
     [
-      layerStartOffsets.ambient,
-      layerStartOffsets.intense,
-      layerStartOffsets.veryIntense,
+      scheduleSourcesAhead,
       setCrossfade,
-      sliderValue
+      sliderValue,
+      stopSources
     ]
   );
 
