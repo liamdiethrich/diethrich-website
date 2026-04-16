@@ -11,29 +11,18 @@ const selectedWorks = [
   filmMusicItems.find((item) => item.slug === "datamosh")
 ].filter((item): item is FilmMusicItem => Boolean(item));
 
-const [leadWork, ...supportingWorks] = selectedWorks;
-
-type WorkPreviewProps = {
-  item: FilmMusicItem;
-  lead?: boolean;
-};
-
-function WorkPreview({ item, lead = false }: WorkPreviewProps) {
+function WorkPreview({ item }: { item: FilmMusicItem }) {
   return (
     <article>
       <Link href={`/film-music/${item.slug}`} className="group block">
-        <div
-          className={`overflow-hidden border border-black/10 bg-black shadow-[0_20px_44px_rgba(23,18,16,0.08)] ${
-            lead ? "aspect-[16/11]" : "aspect-[16/10]"
-          }`}
-        >
+        <div className="aspect-[16/10] overflow-hidden border border-black/10 bg-black shadow-[0_20px_44px_rgba(23,18,16,0.08)]">
           {item.posterImage ? (
             <div className="relative h-full w-full">
               <Image
                 src={item.posterImage}
                 alt={item.title}
                 fill
-                sizes={lead ? "(max-width: 1024px) 100vw, 58vw" : "(max-width: 1024px) 100vw, 38vw"}
+                sizes="(max-width: 768px) 100vw, 46vw"
                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,8,0.08)_0%,rgba(10,8,8,0.55)_100%)]" />
@@ -45,11 +34,7 @@ function WorkPreview({ item, lead = false }: WorkPreviewProps) {
           {item.sourceTitle ? (
             <p className="font-heading text-[0.8rem] uppercase tracking-[0.22em] text-accent">{item.sourceTitle}</p>
           ) : null}
-          <h3
-            className={`font-display leading-[0.96] text-ink transition-colors group-hover:text-accent ${
-              lead ? "text-[2.2rem] md:text-[2.7rem]" : "text-[1.95rem] md:text-[2.4rem]"
-            }`}
-          >
+          <h3 className="font-display text-[1.95rem] leading-[0.96] text-ink transition-colors group-hover:text-accent md:text-[2.4rem]">
             {item.title}
           </h3>
           {item.homeCaption ? (
@@ -130,25 +115,7 @@ export default function HomePage() {
                         height={529}
                         priority
                         sizes="(max-width: 640px) 76px, (max-width: 768px) 88px, 108px"
-                        className="h-[4.75rem] w-auto drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] sm:h-[5.5rem] md:h-[6.75rem]"
-                      />
-                      <Image
-                        src="/images/awards/the-juilliard-orchestra-competition-emblem-cropped.png"
-                        alt="Juilliard Orchestra Competition emblem"
-                        width={535}
-                        height={529}
-                        priority
-                        sizes="(max-width: 640px) 76px, (max-width: 768px) 88px, 108px"
-                        className="h-[4.75rem] w-auto drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] sm:h-[5.5rem] md:h-[6.75rem]"
-                      />
-                      <Image
-                        src="/images/awards/chigiana-emblem-cropped.png"
-                        alt="Chigiana Film Scoring Festival emblem"
-                        width={874}
-                        height={837}
-                        priority
-                        sizes="(max-width: 640px) 76px, (max-width: 768px) 88px, 108px"
-                        className="h-[4.75rem] w-auto drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] sm:h-[5.5rem] md:h-[6.75rem]"
+                        className="h-[5.05rem] w-auto brightness-[1.05] contrast-[1.06] drop-shadow-[0_14px_20px_rgba(0,0,0,0.18)] sm:h-[5.8rem] md:h-[7.1rem]"
                       />
                     </div>
                   </div>
@@ -161,21 +128,11 @@ export default function HomePage() {
 
       <section className="border-t border-black/8 bg-[linear-gradient(180deg,#ece5da_0%,#e7dfd4_100%)] py-[4.5rem] md:py-24 lg:py-28">
         <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
-          <div className="grid gap-5 lg:grid-cols-12">
-            {leadWork ? (
-              <div className="lg:col-span-7">
-                <WorkPreview item={leadWork} lead />
-              </div>
-            ) : null}
-
-            {supportingWorks.length > 0 ? (
-              <div className="space-y-5 lg:col-span-5">
-                {supportingWorks.map((item) => (
-                  <WorkPreview key={item.slug} item={item} />
-                ))}
-              </div>
-              ) : null}
-            </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {selectedWorks.map((item) => (
+              <WorkPreview key={item.slug} item={item} />
+            ))}
+          </div>
 
           <div className="mt-12 flex justify-center md:mt-16">
             <Link
