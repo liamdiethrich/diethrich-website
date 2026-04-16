@@ -7,27 +7,12 @@ import { siteConfig } from "@/content/site";
 export default function AboutPage() {
   return (
     <div className="bg-paper text-ink">
-      <SecondaryPageMasthead
-        eyebrow="ABOUT"
-        title="About"
-      />
+      <SecondaryPageMasthead title="About" />
 
       <section className="bg-paper py-[4.75rem] md:py-24 lg:py-28">
         <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
-          <div className="grid gap-10 border-t border-black/10 pt-7 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,0.64fr)] lg:items-end lg:gap-x-16 xl:gap-x-20">
-            <div className="relative overflow-hidden border border-black/10 bg-black shadow-[0_24px_52px_rgba(23,18,16,0.08)]">
-              <Image
-                src="/images/about/liam-conducting-portrait-enhanced.jpg"
-                alt="Portrait of Liam Diethrich conducting"
-                width={900}
-                height={1200}
-                priority
-                sizes="(max-width: 1024px) 100vw, 46vw"
-                className="aspect-[4/5] h-auto w-full object-cover object-center"
-              />
-            </div>
-
-            <div className="space-y-8 lg:pb-4">
+          <div className="grid gap-10 border-t border-black/10 pt-7 lg:grid-cols-[minmax(0,0.76fr)_minmax(0,0.56fr)] lg:items-start lg:gap-x-16 xl:gap-x-20">
+            <div className="space-y-8">
               <p className="max-w-[34rem] text-[1.06rem] leading-[1.84] text-ink/76 md:text-[1.14rem]">
                 Liam Diethrich is a composer and violinist trained at Juilliard and USC who writes for screen, games,
                 and the concert stage. His award-winning music is recognized for its unique and innovative voice and
@@ -52,6 +37,18 @@ export default function AboutPage() {
                   Resume
                 </Link>
               </div>
+            </div>
+
+            <div className="relative max-w-[30rem] overflow-hidden border border-black/10 bg-black shadow-[0_24px_52px_rgba(23,18,16,0.08)] lg:justify-self-end">
+              <Image
+                src="/images/about/liam-conducting-portrait-enhanced.jpg"
+                alt="Portrait of Liam Diethrich conducting"
+                width={900}
+                height={1200}
+                priority
+                sizes="(max-width: 1024px) 100vw, 32rem"
+                className="aspect-[4/5] h-auto w-full object-cover object-center"
+              />
             </div>
           </div>
         </Container>
