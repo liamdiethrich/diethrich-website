@@ -44,12 +44,12 @@ function validateField(fieldName: ValidatedFieldName, value: string) {
   const trimmedValue = value.trim();
 
   if (fieldName === "name") {
-    return trimmedValue ? "" : "Please include your name.";
+    return trimmedValue ? "" : "Please enter your name.";
   }
 
   if (fieldName === "email") {
     if (!trimmedValue) {
-      return "Please include your email.";
+      return "Please enter your email address.";
     }
 
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedValue);
@@ -74,7 +74,7 @@ function buildMailtoHref(emailAddress: string, values: FormValues) {
   const timeline = values.timeline.trim();
   const message = values.message.trim();
 
-  const subject = ["Contact Inquiry", projectType, name].filter(Boolean).join(" | ");
+  const subject = ["Project Inquiry", projectType, name].filter(Boolean).join(" | ");
 
   const detailLines = [
     `Name: ${name}`,
@@ -215,7 +215,7 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
             className={inputClassName}
           >
             <option value="">
-              Select a project type
+              Select project type
             </option>
             {projectTypeOptions.map((option) => (
               <option key={option} value={option}>
@@ -236,7 +236,7 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
             autoComplete="off"
             value={values.timeline}
             onChange={handleChange}
-            placeholder="Optional"
+            placeholder="Optional — target dates or deadline"
             className={inputClassName}
           />
         </div>
@@ -271,19 +271,19 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
             type="submit"
             className="w-full rounded-full border border-accent/80 bg-accent px-8 py-3.5 text-center font-heading text-[0.86rem] uppercase tracking-[0.18em] text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.34),0_14px_28px_rgba(0,0,0,0.08)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-auto sm:min-w-[10rem] md:order-2 md:text-[0.92rem]"
           >
-            Send Inquiry
+            Open Email Draft
           </button>
           <div className="space-y-2 md:order-1">
             <p className="max-w-[28rem] text-[0.78rem] leading-relaxed text-ink/52 md:text-[0.82rem]">
-              Sending opens your default email app with a drafted inquiry.
+              This opens your default email app with a draft already prepared.
             </p>
             {showHandoffMessage ? (
               <p
                 aria-live="polite"
                 className="max-w-[28rem] text-[0.78rem] leading-relaxed text-ink/62 md:text-[0.82rem]"
               >
-                Your draft should open in your email app. If it does not, please try again with your email client
-                enabled.
+                Your draft should open in your email app. If it doesn’t, please make sure a default email app is
+                enabled and try again.
               </p>
             ) : null}
           </div>
