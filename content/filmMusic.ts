@@ -51,6 +51,12 @@ export const filmMusicItems: FilmMusicItem[] = [
 
 export const filmMusicAudioTracks: FilmMusicAudioTrack[] = [
   {
+    slug: "finally-free",
+    title: "Finally Free",
+    audioUrl: "/audio/film-music/finally-free.wav",
+    imageUrl: "/images/film-music/audio-tracks/finally-free.png"
+  },
+  {
     slug: "to-rise-against",
     title: "To Rise Against",
     audioUrl: "/audio/film-music/to-rise-against.wav",
@@ -91,11 +97,5 @@ export const filmMusicAudioTracks: FilmMusicAudioTrack[] = [
     title: "Simple Joy",
     audioUrl: "/audio/film-music/simple-joy.wav",
     imageUrl: "/images/film-music/audio-tracks/simple-joy.jpg"
-  },
-  {
-    slug: "finally-free",
-    title: "Finally Free",
-    audioUrl: "/audio/film-music/finally-free.wav",
-    imageUrl: "/images/film-music/audio-tracks/finally-free.png"
   }
 ];
