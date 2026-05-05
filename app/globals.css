@@ -63,15 +63,19 @@ body {
   background: transparent;
 }
 
+.music-range-progress {
+  --range-progress: 0%;
+}
+
 .music-range::-webkit-slider-runnable-track,
 .music-range-dark::-webkit-slider-runnable-track {
-  height: 1px;
+  height: 2px;
   border-radius: 999px;
 }
 
 .music-range::-moz-range-track,
 .music-range-dark::-moz-range-track {
-  height: 1px;
+  height: 2px;
   border: 0;
   border-radius: 999px;
 }
@@ -84,6 +88,27 @@ body {
 .music-range-dark::-webkit-slider-runnable-track,
 .music-range-dark::-moz-range-track {
   background: rgba(246, 240, 231, 0.18);
+}
+
+.music-range-progress::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    90deg,
+    rgba(243, 100, 36, 0.95) 0%,
+    rgba(246, 240, 231, 0.9) var(--range-progress),
+    rgba(246, 240, 231, 0.18) var(--range-progress),
+    rgba(246, 240, 231, 0.18) 100%
+  );
+}
+
+.music-range-progress::-moz-range-track {
+  background: rgba(246, 240, 231, 0.18);
+}
+
+.music-range-progress::-moz-range-progress {
+  height: 2px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(243, 100, 36, 0.95) 0%, rgba(246, 240, 231, 0.9) 100%);
 }
 
 .music-range::-webkit-slider-thumb,

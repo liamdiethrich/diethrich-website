@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import type { CSSProperties, ChangeEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NormalTrack } from "@/content/gameMusic";
 
 type PosterAudioCardProps = {
@@ -25,6 +26,7 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const imageAlt = `${track.title} artwork`;
+  const progressPercent = duration > 0 ? Math.min(100, Math.max(0, (currentTime / duration) * 100)) : 0;
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -79,19 +81,19 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,12,14,0.04)_0%,rgba(12,12,14,0.18)_40%,rgba(12,12,14,0.62)_100%)]" />
-        <span className="absolute bottom-3 right-3 border border-white/12 bg-black/58 px-3 py-1.5 font-heading text-[0.72rem] uppercase tracking-[0.22em] text-ivory/76 backdrop-blur-sm md:bottom-4 md:right-4">
+        <span className="absolute bottom-3 right-3 border border-white/12 bg-black/58 px-3 py-1.5 font-heading text-[0.92rem] uppercase tracking-[0.16em] text-ivory/76 backdrop-blur-sm md:bottom-4 md:right-4">
           {formatDuration(duration)}
         </span>
       </div>
 
       <div className="space-y-4 p-4 md:p-5">
         <div className="space-y-2">
-          <p className="font-heading text-[0.76rem] uppercase tracking-[0.24em] text-accent/92">{track.mood}</p>
+          <p className="font-heading text-[0.96rem] uppercase tracking-[0.18em] text-accent/92">{track.mood}</p>
           <h3 className="font-display text-[1.68rem] leading-[0.96] text-ivory md:text-[2rem]">{track.title}</h3>
         </div>
 
         <div className="border-t border-white/8 pt-3.5">
-          <div className="mb-2 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.16em] text-ivory/42">
+          <div className="mb-2 flex items-center justify-between gap-3 text-[0.92rem] uppercase tracking-[0.12em] text-ivory/42">
             <div className="font-heading">{isPlaying ? "Playing" : "Ready"}</div>
             <div>
               {formatDuration(currentTime)} / {formatDuration(duration)}
@@ -106,7 +108,8 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
             onChange={handleSeek}
             disabled={duration <= 0}
             aria-label={`Playback position for ${track.title}`}
-            className="music-range-dark w-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+            className="music-range-dark music-range-progress w-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+            style={{ "--range-progress": `${progressPercent}%` } as CSSProperties}
           />
         </div>
 
@@ -114,7 +117,7 @@ export function PosterAudioCard({ track }: PosterAudioCardProps) {
           type="button"
           onClick={togglePlay}
           aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
-          className="inline-flex min-h-11 items-center justify-center rounded-full border border-accent/60 px-5 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-accent/60 px-5 font-heading text-[0.98rem] uppercase tracking-[0.16em] text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           {isPlaying ? "Pause" : "Play"}
         </button>

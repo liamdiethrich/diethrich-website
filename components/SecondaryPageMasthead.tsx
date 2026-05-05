@@ -27,7 +27,7 @@ export function SecondaryPageMasthead({
           <div className="grid gap-10 md:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,21rem)] lg:items-end lg:gap-x-16 xl:gap-x-20">
             <div className="max-w-[46rem] space-y-5 md:space-y-6">
               {eyebrow ? (
-                <p className="font-heading text-[0.84rem] uppercase tracking-[0.26em] text-accent md:text-[0.9rem]">
+                <p className="font-heading text-[0.98rem] uppercase tracking-[0.2em] text-accent md:text-[1.02rem]">
                   {eyebrow}
                 </p>
               ) : null}
@@ -35,10 +35,10 @@ export function SecondaryPageMasthead({
                 {title}
               </h1>
               {body ? (
-                <p className="max-w-[39rem] text-[1.06rem] leading-[1.76] text-ink/72 md:text-[1.14rem]">{body}</p>
+                <p className="max-w-[39rem] text-[1.18rem] leading-[1.76] text-ink/72 md:text-[1.24rem]">{body}</p>
               ) : null}
               {supportingLine ? (
-                <p className="max-w-[31rem] border-t border-black/10 pt-5 font-heading text-[0.8rem] uppercase tracking-[0.22em] text-ink/52">
+                <p className="max-w-[31rem] border-t border-black/10 pt-5 font-heading text-[0.96rem] uppercase tracking-[0.18em] text-ink/52">
                   {supportingLine}
                 </p>
               ) : null}

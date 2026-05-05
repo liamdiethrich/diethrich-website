@@ -22,6 +22,11 @@ export const siteConfig = {
     { label: "Music", href: "/film-music" },
     { label: "About", href: "/about" }
   ] satisfies NavItem[],
+  musicSectionLinks: [
+    { label: "Film Music", href: "/film-music#film-work" },
+    { label: "Game Music", href: "/film-music#game-music" },
+    { label: "Additional Music", href: "/film-music#audio-tracks" }
+  ] satisfies NavItem[],
   socialLinks: [
     {
       label: "LinkedIn",

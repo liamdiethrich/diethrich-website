@@ -30,11 +30,11 @@ const initialValues: FormValues = {
 };
 
 const inputClassName =
-  "h-12 w-full border border-black/12 bg-white/82 px-4 text-[1.02rem] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.82)] transition-[border-color,box-shadow,background-color] placeholder:text-ink/34 focus-visible:border-accent focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/14 md:text-[1.08rem]";
+  "h-12 w-full border border-black/12 bg-white/82 px-4 text-[1.14rem] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.82)] transition-[border-color,box-shadow,background-color] placeholder:text-ink/34 focus-visible:border-accent focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/14 md:text-[1.2rem]";
 
-const labelClassName = "font-heading text-[0.78rem] uppercase leading-none tracking-[0.2em] text-ink/70 md:text-[0.86rem]";
+const labelClassName = "font-heading text-[0.98rem] uppercase leading-none tracking-[0.16em] text-ink/70 md:text-[1.02rem]";
 
-const errorClassName = "text-[0.84rem] leading-relaxed text-accent";
+const errorClassName = "text-[0.98rem] leading-relaxed text-accent";
 
 function isValidatedField(fieldName: string): fieldName is ValidatedFieldName {
   return fieldName === "name" || fieldName === "email" || fieldName === "message";
@@ -256,7 +256,7 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
           onChange={handleChange}
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className="min-h-[180px] w-full border border-black/12 bg-white/82 px-4 py-3.5 text-[1.02rem] leading-relaxed text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.82)] transition-[border-color,box-shadow,background-color] placeholder:text-ink/34 focus-visible:border-accent focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/14 md:min-h-[208px] md:text-[1.08rem]"
+          className="min-h-[180px] w-full border border-black/12 bg-white/82 px-4 py-3.5 text-[1.14rem] leading-relaxed text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.82)] transition-[border-color,box-shadow,background-color] placeholder:text-ink/34 focus-visible:border-accent focus-visible:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/14 md:min-h-[208px] md:text-[1.2rem]"
         />
         {errors.message ? (
           <p id="message-error" className={errorClassName}>
@@ -269,18 +269,18 @@ export function ContactInquiryForm({ emailAddress }: ContactInquiryFormProps) {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-6">
           <button
             type="submit"
-            className="w-full rounded-full border border-accent/80 bg-accent px-8 py-3.5 text-center font-heading text-[0.86rem] uppercase tracking-[0.18em] text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.34),0_14px_28px_rgba(0,0,0,0.08)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-auto sm:min-w-[10rem] md:order-2 md:text-[0.92rem]"
+            className="w-full rounded-full border border-accent/80 bg-accent px-8 py-3.5 text-center font-heading text-[0.98rem] uppercase tracking-[0.14em] text-black shadow-[inset_0_1px_0_rgba(255,255,255,0.34),0_14px_28px_rgba(0,0,0,0.08)] transition hover:brightness-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:w-auto sm:min-w-[10rem] md:order-2 md:text-[1.02rem]"
           >
             Open Email Draft
           </button>
           <div className="space-y-2 md:order-1">
-            <p className="max-w-[28rem] text-[0.78rem] leading-relaxed text-ink/52 md:text-[0.82rem]">
+            <p className="max-w-[28rem] text-[0.98rem] leading-relaxed text-ink/52 md:text-[1.02rem]">
               This opens your default email app with a draft already prepared.
             </p>
             {showHandoffMessage ? (
               <p
                 aria-live="polite"
-                className="max-w-[28rem] text-[0.78rem] leading-relaxed text-ink/62 md:text-[0.82rem]"
+                className="max-w-[28rem] text-[0.98rem] leading-relaxed text-ink/62 md:text-[1.02rem]"
               >
                 Your draft should open in your email app. If it doesn’t, please make sure a default email app is
                 enabled and try again.

@@ -20,6 +20,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const linkedIn = siteConfig.socialLinks.find((item) => item.label === "LinkedIn");
+  const musicSectionLinks = siteConfig.musicSectionLinks;
 
   useEffect(() => {
     const onScroll = () => {
@@ -62,6 +63,12 @@ export function Header() {
   const socialButtonClassName = transparentHomeHeader
     ? "border-white/18 bg-white/[0.02] text-ivory hover:border-accent hover:bg-white/6"
     : "border-black/10 bg-white/35 text-ink hover:border-accent hover:bg-white/60";
+  const desktopDropdownShellClassName = transparentHomeHeader
+    ? "border-white/12 bg-[rgba(23,18,16,0.92)] text-ivory shadow-[0_18px_40px_rgba(0,0,0,0.28)] backdrop-blur-xl"
+    : "border-black/10 bg-[#f8f3ea] text-ink shadow-[0_18px_40px_rgba(23,18,16,0.08)]";
+  const desktopDropdownLinkClassName = transparentHomeHeader
+    ? "text-ivory/74 hover:text-accent"
+    : "text-ink/76 hover:text-accent";
 
   const handleMobileNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (pathname === href) {
@@ -77,10 +84,10 @@ export function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${shellClassName}`}>
       <Container className="max-w-none px-4 sm:px-5 md:px-[44px] xl:px-[60px]">
-        <div className="flex min-h-[76px] items-center gap-4 md:min-h-[92px] md:gap-10">
+        <div className="flex min-h-[76px] items-center gap-3 md:min-h-[92px] md:gap-10">
           <Link
             href="/"
-            className={`inline-flex items-center font-heading text-[1.08rem] uppercase leading-none tracking-[0.32em] transition-opacity hover:opacity-75 sm:text-[1.12rem] md:text-[1.42rem] ${
+            className={`inline-flex items-center font-heading text-[0.96rem] uppercase leading-none tracking-[0.22em] transition-opacity hover:opacity-75 sm:text-[1.06rem] sm:tracking-[0.24em] md:text-[1.42rem] md:tracking-[0.28em] ${
               transparentHomeHeader ? "text-ivory" : "text-ink"
             }`}
           >
@@ -90,13 +97,47 @@ export function Header() {
           <nav aria-label="Primary" className="ml-auto hidden items-center gap-7 lg:flex xl:gap-9">
             {siteConfig.navLinks.map((item) => {
               const active = isActivePath(pathname, item.href);
+              const showMusicDropdown = item.href === "/film-music" && musicSectionLinks.length > 0;
+
+              if (showMusicDropdown) {
+                return (
+                  <div key={item.href} className="group relative">
+                    <Link
+                      href={item.href}
+                      aria-current={active ? "page" : undefined}
+                      aria-haspopup="menu"
+                      className={`relative inline-flex items-center font-heading text-[0.98rem] uppercase tracking-[0.2em] transition ${
+                        active ? "text-accent" : linkClassName
+                      } after:absolute after:-bottom-2 after:left-0 after:h-px after:transition-all ${
+                        active ? "after:w-full after:bg-accent" : "after:w-0 hover:after:w-full hover:after:bg-current"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+
+                    <div className="pointer-events-none absolute left-0 top-full z-20 w-[15.5rem] pt-3 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
+                      <div className={`overflow-hidden border ${desktopDropdownShellClassName}`}>
+                        {musicSectionLinks.map((sectionLink) => (
+                          <Link
+                            key={sectionLink.href}
+                            href={sectionLink.href}
+                            className={`block px-4 py-3 font-heading text-[0.96rem] uppercase tracking-[0.16em] transition ${desktopDropdownLinkClassName}`}
+                          >
+                            {sectionLink.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
 
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`relative font-heading text-[0.9rem] uppercase tracking-[0.24em] transition ${
+                  className={`relative font-heading text-[0.98rem] uppercase tracking-[0.2em] transition ${
                     active ? "text-accent" : linkClassName
                   } after:absolute after:-bottom-2 after:left-0 after:h-px after:transition-all ${
                     active ? "after:w-full after:bg-accent" : "after:w-0 hover:after:w-full hover:after:bg-current"
@@ -110,7 +151,7 @@ export function Header() {
 
           <Link
             href={siteConfig.contactUrl}
-            className={`hidden min-h-11 items-center justify-center rounded-full border bg-white/[0.02] px-5 font-heading text-[0.84rem] uppercase tracking-[0.22em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:inline-flex ${buttonClassName}`}
+            className={`hidden min-h-11 items-center justify-center rounded-full border bg-white/[0.02] px-5 font-heading text-[0.98rem] uppercase tracking-[0.18em] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:inline-flex ${buttonClassName}`}
           >
             Contact
           </Link>
@@ -133,14 +174,14 @@ export function Header() {
             </a>
           ) : null}
 
-          <div className="ml-auto flex items-center gap-3 lg:hidden">
+          <div className="ml-auto flex items-center gap-2 sm:gap-3 lg:hidden">
             {linkedIn ? (
               <a
                 href={linkedIn.href}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Visit Liam Diethrich on LinkedIn"
-                className={`flex h-11 w-11 items-center justify-center rounded-full border shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${socialButtonClassName}`}
+                className={`hidden h-11 w-11 items-center justify-center rounded-full border shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:flex ${socialButtonClassName}`}
               >
                 <svg
                   aria-hidden="true"
@@ -188,6 +229,36 @@ export function Header() {
               <nav aria-label="Mobile primary" className="flex flex-col border-t border-black/10">
                 {siteConfig.navLinks.map((item) => {
                   const active = isActivePath(pathname, item.href);
+                  const showMusicDropdown = item.href === "/film-music" && musicSectionLinks.length > 0;
+
+                  if (showMusicDropdown) {
+                    return (
+                      <div key={item.href} className="border-b border-black/10 py-5">
+                        <Link
+                          href={item.href}
+                          onClick={(event) => handleMobileNavClick(event, item.href)}
+                          aria-current={active ? "page" : undefined}
+                          className={`block font-heading text-[1.14rem] uppercase tracking-[0.18em] transition ${
+                            active ? "text-accent" : "text-ink/82"
+                          }`}
+                        >
+                          {item.label}
+                        </Link>
+                        <div className="mt-4 flex flex-col gap-3 pl-4">
+                          {musicSectionLinks.map((sectionLink) => (
+                            <Link
+                              key={sectionLink.href}
+                              href={sectionLink.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="font-heading text-[0.98rem] uppercase tracking-[0.16em] text-ink/66 transition hover:text-accent"
+                            >
+                              {sectionLink.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
 
                   return (
                     <Link
@@ -195,7 +266,7 @@ export function Header() {
                       href={item.href}
                       onClick={(event) => handleMobileNavClick(event, item.href)}
                       aria-current={active ? "page" : undefined}
-                      className={`border-b border-black/10 py-5 font-heading text-[1.08rem] uppercase tracking-[0.22em] transition ${
+                      className={`border-b border-black/10 py-5 font-heading text-[1.14rem] uppercase tracking-[0.18em] transition ${
                         active ? "text-accent" : "text-ink/82"
                       }`}
                     >
@@ -209,7 +280,7 @@ export function Header() {
                 <Link
                   href={siteConfig.contactUrl}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/12 bg-white/50 px-6 font-heading text-[0.88rem] uppercase tracking-[0.22em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-ink/12 bg-white/50 px-6 font-heading text-[0.98rem] uppercase tracking-[0.18em] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] transition hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   Contact
                 </Link>

@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import type { CSSProperties, ChangeEvent, KeyboardEvent, MouseEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FilmMusicAudioTrack } from "@/content/filmMusic";
 
 type AudioTrackCardProps = {
   track: FilmMusicAudioTrack;
   index?: number;
 };
+
+const CARD_TOGGLE_GUARD_SELECTOR = "button, input, a, select, textarea, [data-no-card-toggle]";
 
 function formatClockTime(seconds: number) {
   if (!Number.isFinite(seconds) || seconds <= 0) {
@@ -26,6 +29,7 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const trackNumber = typeof index === "number" ? String(index + 1).padStart(2, "0") : null;
+  const progressPercent = duration > 0 ? Math.min(100, Math.max(0, (currentTime / duration) * 100)) : 0;
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -66,8 +70,40 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
     setCurrentTime(nextTime);
   };
 
+  const shouldIgnoreCardToggle = (target: EventTarget | null) =>
+    target instanceof HTMLElement && Boolean(target.closest(CARD_TOGGLE_GUARD_SELECTOR));
+
+  const handleCardClick = (event: MouseEvent<HTMLElement>) => {
+    if (shouldIgnoreCardToggle(event.target)) {
+      return;
+    }
+
+    togglePlay();
+  };
+
+  const handleCardKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if ((event.key !== "Enter" && event.key !== " ") || shouldIgnoreCardToggle(event.target)) {
+      return;
+    }
+
+    event.preventDefault();
+    togglePlay();
+  };
+
+  const stopCardTogglePropagation = (event: MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+  };
+
   return (
-    <article className="group w-full overflow-hidden border border-black/10 bg-[#181413] text-ivory shadow-[0_20px_42px_rgba(23,18,16,0.12)]">
+    <article
+      role="button"
+      tabIndex={0}
+      aria-pressed={isPlaying}
+      aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
+      onClick={handleCardClick}
+      onKeyDown={handleCardKeyDown}
+      className="group w-full cursor-pointer overflow-hidden border border-black/10 bg-[#181413] text-ivory shadow-[0_20px_42px_rgba(23,18,16,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
       <div className="grid sm:grid-cols-[140px_minmax(0,1fr)]">
         <div className="relative aspect-[5/4] overflow-hidden bg-[#111010] sm:aspect-auto sm:min-h-[152px]">
           {track.imageUrl ? (
@@ -80,14 +116,14 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,#3a3a40_0%,#1a1b1f_48%,#101114_100%)] px-6 text-center">
-              <p className="font-heading text-[1rem] uppercase tracking-[0.18em] text-neutral-200 md:text-[1.08rem]">
+              <p className="font-heading text-[1.08rem] uppercase tracking-[0.14em] text-neutral-200 md:text-[1.14rem]">
                 {track.title}
               </p>
             </div>
           )}
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,10,12,0.04)_0%,rgba(10,10,12,0.42)_100%)]" />
           {trackNumber ? (
-            <span className="absolute left-3 top-3 border border-white/10 bg-black/48 px-2.5 py-1 font-heading text-[0.7rem] uppercase tracking-[0.24em] text-ivory/78 backdrop-blur-sm">
+            <span className="absolute left-3 top-3 border border-white/10 bg-black/48 px-2.5 py-1 font-heading text-[0.94rem] uppercase tracking-[0.16em] text-ivory/78 backdrop-blur-sm">
               {trackNumber}
             </span>
           ) : null}
@@ -104,6 +140,8 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
               type="button"
               onClick={togglePlay}
               aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
+              data-no-card-toggle
+              onClickCapture={stopCardTogglePropagation}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent/60 text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {isPlaying ? (
@@ -118,24 +156,28 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
           </div>
 
           <div className="mt-5 border-t border-white/8 pt-3.5">
-            <div className="mb-2 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.16em] text-ivory/42">
+            <div className="mb-2 flex items-center justify-between gap-3 text-[0.92rem] uppercase tracking-[0.12em] text-ivory/42">
               <div className="font-heading">{trackNumber ? `${trackNumber} / Listen` : "Listen"}</div>
               <div>
                 {formatClockTime(currentTime)} / {formatClockTime(duration)}
               </div>
             </div>
-            <input
-              type="range"
-              min={0}
-              max={duration > 0 ? duration : 1}
-              step={0.01}
-              value={Math.min(currentTime, duration > 0 ? duration : 1)}
-              onChange={handleSeek}
-              disabled={duration <= 0}
-              aria-label={`Playback position for ${track.title}`}
-              className="music-range-dark w-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
-            />
-            <div className="mt-2 flex items-center justify-between gap-3 text-[11px] uppercase tracking-[0.16em] text-ivory/40">
+            <div data-no-card-toggle onClickCapture={stopCardTogglePropagation} className="-mx-1 px-1 py-2">
+              <input
+                type="range"
+                min={0}
+                max={duration > 0 ? duration : 1}
+                step={0.01}
+                value={Math.min(currentTime, duration > 0 ? duration : 1)}
+                onChange={handleSeek}
+                disabled={duration <= 0}
+                aria-label={`Playback position for ${track.title}`}
+                data-no-card-toggle
+                className="music-range-dark music-range-progress w-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+                style={{ "--range-progress": `${progressPercent}%` } as CSSProperties}
+              />
+            </div>
+            <div className="mt-2 flex items-center justify-between gap-3 text-[0.92rem] uppercase tracking-[0.12em] text-ivory/40">
               <div className="font-heading text-accent/90">{isPlaying ? "Playing" : "Ready"}</div>
               <div className="h-px flex-1 bg-white/8" />
             </div>

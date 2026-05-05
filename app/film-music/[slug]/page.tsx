@@ -24,7 +24,7 @@ export default async function FilmDetailPage({ params }: FilmDetailPageProps) {
       <Container className="max-w-[1100px]">
         <div className="mb-8 space-y-3 text-center md:mb-10">
           {item.sourceTitle ? (
-            <p className="font-heading text-[0.8rem] uppercase tracking-[0.24em] text-neutral-500 md:text-[0.88rem] md:tracking-[0.28em]">
+            <p className="font-heading text-[0.96rem] uppercase tracking-[0.18em] text-neutral-500 md:text-[1rem] md:tracking-[0.2em]">
               {item.sourceTitle}
             </p>
           ) : null}

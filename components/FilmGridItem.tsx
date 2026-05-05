@@ -50,7 +50,7 @@ export function FilmGridItem({ item, variant = "standard" }: FilmGridItemProps) 
         <div className={`grid gap-4 ${isFeature ? "md:grid-cols-[minmax(0,1fr)_minmax(12rem,18rem)] md:gap-7" : ""}`}>
           <div className="space-y-2.5">
             {item.sourceTitle ? (
-              <p className="font-heading text-[0.8rem] uppercase tracking-[0.22em] text-accent">{item.sourceTitle}</p>
+              <p className="font-heading text-[0.96rem] uppercase tracking-[0.18em] text-accent">{item.sourceTitle}</p>
             ) : null}
             <Link
               href={`/film-music/${item.slug}`}
@@ -65,14 +65,14 @@ export function FilmGridItem({ item, variant = "standard" }: FilmGridItemProps) 
               </h2>
             </Link>
             {!isFeature && caption ? (
-              <p className="max-w-[38rem] text-[0.98rem] leading-[1.68] text-ink/70 md:text-[1rem]">{caption}</p>
+              <p className="max-w-[38rem] text-[1.14rem] leading-[1.68] text-ink/70 md:text-[1.2rem]">{caption}</p>
             ) : null}
           </div>
 
           {isFeature ? (
             <div className="space-y-3 md:pt-1">
               {caption ? (
-                <p className="text-[0.98rem] leading-[1.68] text-ink/70 md:text-[1rem]">{caption}</p>
+                <p className="text-[1.14rem] leading-[1.68] text-ink/70 md:text-[1.2rem]">{caption}</p>
               ) : (
                 <div />
               )}

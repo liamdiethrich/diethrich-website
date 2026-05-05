@@ -16,34 +16,6 @@ export default function FilmMusicPage() {
             <h1 className="font-display text-[2.95rem] leading-[0.92] text-ink md:text-[4rem] lg:text-[4.8rem]">
               Music
             </h1>
-
-            <details className="relative mt-4 w-fit">
-              <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-full border border-black/12 bg-white/45 text-[1.05rem] text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] transition hover:border-accent/40 hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
-                <span aria-hidden="true">&#9776;</span>
-                <span className="sr-only">Jump to music sections</span>
-              </summary>
-
-              <div className="absolute left-0 top-full z-10 mt-3 min-w-[12rem] border border-black/10 bg-[#f8f3ea] p-2 shadow-[0_18px_40px_rgba(23,18,16,0.08)]">
-                <a
-                  href="#film-work"
-                  className="block px-3 py-2 font-heading text-[0.76rem] uppercase tracking-[0.2em] text-ink/82 transition hover:text-accent"
-                >
-                  Film Music
-                </a>
-                <a
-                  href="#game-music"
-                  className="block px-3 py-2 font-heading text-[0.76rem] uppercase tracking-[0.2em] text-ink/82 transition hover:text-accent"
-                >
-                  Game Music
-                </a>
-                <a
-                  href="#audio-tracks"
-                  className="block px-3 py-2 font-heading text-[0.76rem] uppercase tracking-[0.2em] text-ink/82 transition hover:text-accent"
-                >
-                  Additional Music
-                </a>
-              </div>
-            </details>
           </div>
         </Container>
       </section>
