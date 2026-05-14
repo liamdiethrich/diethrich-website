@@ -90,8 +90,9 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
     togglePlay();
   };
 
-  const stopCardTogglePropagation = (event: MouseEvent<HTMLElement>) => {
+  const handlePlayButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    togglePlay();
   };
 
   return (
@@ -138,10 +139,9 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
             </div>
             <button
               type="button"
-              onClick={togglePlay}
+              onClick={handlePlayButtonClick}
               aria-label={isPlaying ? `Pause ${track.title}` : `Play ${track.title}`}
               data-no-card-toggle
-              onClickCapture={stopCardTogglePropagation}
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent/60 text-accent transition hover:bg-accent hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {isPlaying ? (
@@ -162,7 +162,7 @@ export function AudioTrackCard({ track, index }: AudioTrackCardProps) {
                 {formatClockTime(currentTime)} / {formatClockTime(duration)}
               </div>
             </div>
-            <div data-no-card-toggle onClickCapture={stopCardTogglePropagation} className="-mx-1 px-1 py-2">
+            <div data-no-card-toggle className="-mx-1 px-1 py-2">
               <input
                 type="range"
                 min={0}
